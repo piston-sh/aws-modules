@@ -51,6 +51,8 @@ resource "aws_vpc_endpoint" "ec2_endpoint" {
   security_group_ids = [
     "${aws_security_group.security_group_common.id}",
   ]
+
+  subnet_ids = ["${var.subnet_ids}"]
 }
 
 data "aws_region" "current" {}
