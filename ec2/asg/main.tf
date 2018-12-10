@@ -53,7 +53,6 @@ resource "aws_vpc_endpoint" "ec2_endpoint" {
   ]
 
   subnet_ids          = ["${var.subnet_ids}"]
-  private_dns_enabled = true
 }
 
 resource "aws_vpc_endpoint_route_table_association" "ec2_endpoint_association" {
