@@ -58,7 +58,7 @@ resource "aws_vpc_endpoint" "ec2_endpoint" {
 
 resource "aws_vpc_endpoint_route_table_association" "ec2_endpoint_association" {
   count           = "${length(var.subnet_ids)}"
-  route_table_id  = "${lookup(element(data.aws_route_table.route_table, count.index), "route_table_id")}"
+  route_table_id  = "${element(data.aws_route_table.route_table.*.route_table_id, count.index)}"
   vpc_endpoint_id = "${aws_vpc_endpoint.ec2_endpoint.id}"
 }
 
