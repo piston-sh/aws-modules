@@ -64,7 +64,7 @@ resource "aws_vpc_endpoint_route_table_association" "ec2_endpoint_association" {
 
 data "aws_route_table" "route_table" {
   count     = "${length(var.subnet_ids)}"
-  subnet_id = "${var.subnet_ids}"
+  subnet_id = "${element(var.subnet_ids, count.index)}"
 }
 
 data "aws_region" "current" {}
