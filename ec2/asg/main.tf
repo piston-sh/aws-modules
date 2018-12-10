@@ -52,7 +52,19 @@ resource "aws_vpc_endpoint" "ec2_endpoint" {
     "${aws_security_group.security_group_common.id}",
   ]
 
-  subnet_ids = ["${var.subnet_ids}"]
+  subnet_ids          = ["${var.subnet_ids}"]
+  private_dns_enabled = true
+}
+
+resource "aws_vpc_endpoint_route_table_association" "ec2_endpoint_association" {
+  count           = "${length(var.subnet_ids)}"
+  route_table_id  = "${lookup(element(data.aws_route_table.route_table, count.index), "route_table_id")}"
+  vpc_endpoint_id = "${aws_vpc_endpoint.ec2_endpoint.id}"
+}
+
+data "aws_route_table" "route_table" {
+  count     = "${length(var.subnet_ids)}"
+  subnet_id = "${var.subnet_ids}"
 }
 
 data "aws_region" "current" {}
