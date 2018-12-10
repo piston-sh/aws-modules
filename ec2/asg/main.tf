@@ -53,17 +53,7 @@ resource "aws_vpc_endpoint" "ec2_endpoint" {
   ]
 
   subnet_ids          = ["${var.subnet_ids}"]
-}
-
-resource "aws_vpc_endpoint_route_table_association" "ec2_endpoint_association" {
-  count           = "${length(var.subnet_ids)}"
-  route_table_id  = "${element(data.aws_route_table.route_table.*.route_table_id, count.index)}"
-  vpc_endpoint_id = "${aws_vpc_endpoint.ec2_endpoint.id}"
-}
-
-data "aws_route_table" "route_table" {
-  count     = "${length(var.subnet_ids)}"
-  subnet_id = "${element(var.subnet_ids, count.index)}"
+  private_dns_enabled = true
 }
 
 data "aws_region" "current" {}
