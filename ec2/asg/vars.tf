@@ -5,6 +5,10 @@ variable "subnet_ids" {
   type = "list"
 }
 
+variable "is_private" {
+  default = false
+}
+
 variable "availability_zones" {
   type = "list"
 }

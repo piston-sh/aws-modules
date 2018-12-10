@@ -53,7 +53,7 @@ resource "aws_vpc_endpoint" "ec2_endpoint" {
   ]
 
   subnet_ids          = ["${var.subnet_ids}"]
-  private_dns_enabled = true
+  private_dns_enabled = "${var.is_private}"
 }
 
 data "aws_region" "current" {}
