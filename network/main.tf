@@ -50,7 +50,7 @@ resource "aws_eip" "nat_eip" {
 resource "aws_nat_gateway" "private_nat" {
   count         = "${length(var.private_subnet_cidrs)}"
   allocation_id = "${element(aws_eip.nat_eip.*.id, count.index)}"
-  subnet_id     = "${element(module.private_subnet.subnet_ids, count.index)}"
+  subnet_id     = "${element(module.public_subnet.subnet_ids, count.index)}"
 
   depends_on = [
     "aws_internet_gateway.gateway",
