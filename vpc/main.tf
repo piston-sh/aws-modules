@@ -1,14 +1,7 @@
 resource "aws_vpc" "vpc" {
   cidr_block           = "${var.cidr_block}"
   enable_dns_hostnames = true
-
-  tags {
-    name = "${var.name}"
-  }
-}
-
-resource "aws_internet_gateway" "gateway" {
-  vpc_id = "${aws_vpc.vpc.id}"
+  enable_dns_support   = true
 
   tags {
     name = "${var.name}"
