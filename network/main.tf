@@ -45,12 +45,22 @@ resource "aws_eip" "nat_eip" {
   depends_on = [
     "aws_internet_gateway.gateway",
   ]
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_nat_gateway" "private_nat" {
   count         = "${length(var.private_subnet_cidrs)}"
   allocation_id = "${element(aws_eip.nat_eip.*.id, count.index)}"
-  subnet_id     = "${element(module.public_subnet.subnet_ids, count.index)}"
+
+  // always route through the first public subnet
+  subnet_id = "${module.public_subnet.subnet_ids[0]}"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 
   depends_on = [
     "aws_internet_gateway.gateway",
