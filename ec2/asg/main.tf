@@ -10,6 +10,10 @@ resource "aws_launch_configuration" "launch_configuration" {
 
   associate_public_ip_address = "${var.associate_public_ip}"
 
+  root_block_device = {
+    volume_size = "${var.volume_size}"
+  }
+
   lifecycle {
     create_before_destroy = true
   }

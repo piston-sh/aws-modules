@@ -36,6 +36,10 @@ variable "desired_capacity" {
   default = 1
 }
 
+variable "volume_size" {
+  default = 8
+}
+
 variable "security_group_ids" {
   type    = "list"
   default = []
