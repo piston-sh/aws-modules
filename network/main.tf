@@ -24,7 +24,7 @@ module "private_subnet" {
 }
 
 resource "aws_internet_gateway" "gateway" {
-  vpc_id = "${module.vpc.id}"
+  vpc_id = "${module.vpc.vpc_id}"
 
   tags {
     name = "${var.name}"
