@@ -60,3 +60,8 @@ variable "associate_public_ip" {
 }
 
 variable "ssh_key_name" {}
+
+variable "custom_tags" {
+  type = "list"
+  default = []
+}

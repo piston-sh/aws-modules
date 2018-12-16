@@ -19,6 +19,21 @@ resource "aws_launch_configuration" "launch_configuration" {
   }
 }
 
+locals {
+  default_tags = [
+    {
+      key                 = "cluster"
+      value               = "${var.cluster_name}"
+      propagate_at_launch = true
+    },
+    {
+      key                 = "instance-group"
+      value               = "${var.instance_group}"
+      propagate_at_launch = true
+    }
+  ]
+}
+
 resource "aws_autoscaling_group" "asg" {
   name_prefix          = "${var.cluster_name}-${var.instance_group}-"
   max_size             = "${var.max_size}"
@@ -34,17 +49,10 @@ resource "aws_autoscaling_group" "asg" {
     "${var.subnet_ids}",
   ]
 
-  tag {
-    key                 = "cluster"
-    value               = "${var.cluster_name}"
-    propagate_at_launch = true
-  }
-
-  tag {
-    key                 = "instance-group"
-    value               = "${var.instance_group}"
-    propagate_at_launch = true
-  }
+  tags = ["${concat(
+    var.custom_tags,
+    local.default_tags,
+  )}"]
 }
 
 resource "aws_vpc_endpoint" "ec2_endpoint" {
