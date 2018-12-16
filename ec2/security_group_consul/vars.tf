@@ -46,5 +46,5 @@ variable "http_api_port" {
 
 variable "dns_port" {
   description = "The port used to resolve DNS queries."
-  default     = 8600
+  default     = 53
 }
