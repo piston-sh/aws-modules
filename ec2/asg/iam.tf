@@ -39,6 +39,9 @@ data "aws_iam_policy_document" "auto_discover_cluster" {
     effect = "Allow"
 
     actions = [
+      "ec2:AssociateAddress",
+      "ec2:DisassociateAddress",
+      "ec2:ReleaseAddress",
       "ec2:DescribeInstances",
       "ec2:DescribeTags",
       "autoscaling:DescribeAutoScalingGroups",
