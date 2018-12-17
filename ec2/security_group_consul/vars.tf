@@ -45,6 +45,11 @@ variable "http_api_port" {
 }
 
 variable "dns_port" {
-  description = "The port used to resolve DNS queries."
+  description = "The port used to resolve DNS queries internally within Consul."
+  default     = 8600
+}
+
+variable "dnsmasq_port" {
+  description = "The port used to resolve DNS queries externally via dnsmasq."
   default     = 53
 }
