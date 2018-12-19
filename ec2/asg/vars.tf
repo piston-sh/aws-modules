@@ -65,3 +65,7 @@ variable "custom_tags" {
   type = "list"
   default = []
 }
+
+variable "default_cooldown" {
+  default = 30
+}

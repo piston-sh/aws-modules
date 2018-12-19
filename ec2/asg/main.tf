@@ -41,7 +41,7 @@ resource "aws_autoscaling_group" "asg" {
   desired_capacity     = "${var.desired_capacity}"
   force_delete         = true
   launch_configuration = "${aws_launch_configuration.launch_configuration.id}"
-  default_cooldown     = 30
+  default_cooldown     = "${var.default_cooldown}"
 
   availability_zones = ["${var.availability_zones}"]
 
