@@ -30,7 +30,7 @@ locals {
       key                 = "instance-group"
       value               = "${var.instance_group}"
       propagate_at_launch = true
-    }
+    },
   ]
 }
 

@@ -50,6 +50,11 @@ variable "allowed_ssh_cidr_blocks" {
   default = []
 }
 
+variable "allowed_ssh_ipv6_cidr_blocks" {
+  type    = "list"
+  default = []
+}
+
 variable "allowed_ssh_security_group_ids" {
   type    = "list"
   default = []
@@ -62,7 +67,7 @@ variable "associate_public_ip" {
 variable "ssh_key_name" {}
 
 variable "custom_tags" {
-  type = "list"
+  type    = "list"
   default = []
 }
 

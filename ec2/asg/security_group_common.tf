@@ -33,6 +33,17 @@ resource "aws_security_group_rule" "allow_ssh_inbound" {
   security_group_id = "${aws_security_group.security_group_common.id}"
 }
 
+resource "aws_security_group_rule" "allow_ssh_inbound_ipv6" {
+  count            = "${length(var.allowed_ssh_ipv6_cidr_blocks) >= 1 ? 1 : 0}"
+  type             = "ingress"
+  from_port        = "22"
+  to_port          = "22"
+  protocol         = "tcp"
+  ipv6_cidr_blocks = ["${var.allowed_ssh_ipv6_cidr_blocks}"]
+
+  security_group_id = "${aws_security_group.security_group_common.id}"
+}
+
 resource "aws_security_group_rule" "allow_ssh_inbound_from_security_group_ids" {
   count                    = "${length(var.allowed_ssh_security_group_ids)}"
   type                     = "ingress"
