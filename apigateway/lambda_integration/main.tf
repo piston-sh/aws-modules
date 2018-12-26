@@ -16,7 +16,7 @@ resource "aws_api_gateway_integration_response" "http_resource_integration_respo
   rest_api_id = "${var.rest_api_id}"
   resource_id = "${var.resource_id}"
   http_method = "${var.http_method}"
-  status_code = "${aws_api_gateway_method_response.processor_200.status_code}"
+  status_code = "200"
 }
 
 resource "aws_api_gateway_integration_response" "http_resource_error_integration_response" {
@@ -25,9 +25,9 @@ resource "aws_api_gateway_integration_response" "http_resource_error_integration
   ]
 
   rest_api_id       = "${var.rest_api_id}"
-  resource_id       = "${aws_api_gateway_resource.http_resource.id}"
-  http_method       = "${aws_api_gateway_method.http_resource_method.http_method}"
-  status_code       = "${aws_api_gateway_method_response.processor_500.status_code}"
+  resource_id       = "${var.resource_id}"
+  http_method       = "${var.http_method}"
+  status_code       = "500"
   selection_pattern = ".*[ERROR].*"
 }
 
@@ -37,9 +37,9 @@ resource "aws_api_gateway_integration_response" "http_resource_forbidden_integra
   ]
 
   rest_api_id       = "${var.rest_api_id}"
-  resource_id       = "${aws_api_gateway_resource.http_resource.id}"
-  http_method       = "${aws_api_gateway_method.http_resource_post_method.http_method}"
-  status_code       = "${aws_api_gateway_method_response.processor_403.status_code}"
+  resource_id       = "${var.resource_id}"
+  http_method       = "${var.http_method}"
+  status_code       = "403"
   selection_pattern = ".*[FORBIDDEN].*"
 }
 
