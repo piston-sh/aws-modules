@@ -1,7 +1,5 @@
 variable "cluster_name" {}
-variable "rest_api_id" {}
-variable "http_method" {}
-variable "resource_path" {}
+variable "rest_api_execution_arn" {}
 variable "s3_bucket_id" {}
 
 # TODO; test if we can merge these into one value

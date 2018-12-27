@@ -18,7 +18,7 @@ resource "aws_lambda_permission" "rest_function_api_gateway_permission" {
 
   principal = "apigateway.amazonaws.com"
 
-  source_arn = "arn:aws:execute-api:${data.aws_region.current.name}::${var.rest_api_id}/*/${var.http_method}${var.resource_path}"
+  source_arn = "${var.rest_api_execution_arn}/*/*/*"
 }
 
 resource "aws_lambda_permission" "rest_function_release_bucket_permission" {
