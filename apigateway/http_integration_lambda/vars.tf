@@ -1,6 +1,10 @@
 variable "rest_api_id" {}
 variable "resource_id" {}
 
-variable "method_lambda_map" {
-  type = "map"
+variable "http_methods" {
+  type = "list"
+}
+
+variable "lambda_arns" {
+  type = "list"
 }
