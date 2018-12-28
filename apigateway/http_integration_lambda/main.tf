@@ -2,7 +2,7 @@ resource "aws_api_gateway_integration" "http_resource_integration" {
   count       = "${length(var.method_lambda_map)}"
   rest_api_id = "${var.rest_api_id}"
   resource_id = "${var.resource_id}"
-  http_method = "${lookup(keys(var.method_lambda_map), count.index)}"
+  http_method = "${element(keys(var.method_lambda_map), count.index)}"
   type        = "AWS"
 
   # Lambdas must always be invoked with a POST request
@@ -14,7 +14,7 @@ resource "aws_api_gateway_integration_response" "http_resource_integration_respo
   count       = "${length(var.method_lambda_map)}"
   rest_api_id = "${var.rest_api_id}"
   resource_id = "${var.resource_id}"
-  http_method = "${lookup(keys(var.method_lambda_map), count.index)}"
+  http_method = "${element(keys(var.method_lambda_map), count.index)}"
   status_code = "200"
 
   depends_on = [
@@ -26,7 +26,7 @@ resource "aws_api_gateway_integration_response" "http_resource_error_integration
   count             = "${length(var.method_lambda_map)}"
   rest_api_id       = "${var.rest_api_id}"
   resource_id       = "${var.resource_id}"
-  http_method       = "${lookup(keys(var.method_lambda_map), count.index)}"
+  http_method       = "${element(keys(var.method_lambda_map), count.index)}"
   status_code       = "500"
   selection_pattern = ".*[ERROR].*"
 
@@ -39,7 +39,7 @@ resource "aws_api_gateway_integration_response" "http_resource_forbidden_integra
   count             = "${length(var.method_lambda_map)}"
   rest_api_id       = "${var.rest_api_id}"
   resource_id       = "${var.resource_id}"
-  http_method       = "${lookup(keys(var.method_lambda_map), count.index)}"
+  http_method       = "${element(keys(var.method_lambda_map), count.index)}"
   status_code       = "403"
   selection_pattern = ".*[FORBIDDEN].*"
 

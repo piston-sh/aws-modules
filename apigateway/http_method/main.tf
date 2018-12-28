@@ -2,7 +2,7 @@ resource "aws_api_gateway_method" "http_resource_method" {
   count         = "${length(var.http_methods)}"
   rest_api_id   = "${var.rest_api_id}"
   resource_id   = "${var.resource_id}"
-  http_method   = "${lookup(var.http_methods, count.index)}"
+  http_method   = "${element(var.http_methods, count.index)}"
   authorization = "NONE"
 }
 
