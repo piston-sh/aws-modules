@@ -1,5 +1,6 @@
 resource "aws_iam_role" "lambda_role" {
-  name = "${var.cluster_name}_lambda_role"
+  count = "${length(keys(var.function_key_map))}"
+  name = "${element(aws_lambda_function.rest_function.*.function_name, count.index)}_lambda_role"
 
   assume_role_policy = <<EOF
 {
