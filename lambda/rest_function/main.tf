@@ -1,5 +1,5 @@
 resource "aws_lambda_function" "rest_function" {
-  count = "${length(var.function_key_map)}"
+  count = "${length(keys(var.function_key_map))}"
 
   s3_bucket = "${var.s3_bucket_id}"
   s3_key    = "${element(values(var.function_key_map), count.index)}"
@@ -13,7 +13,7 @@ resource "aws_lambda_function" "rest_function" {
 }
 
 resource "aws_lambda_permission" "rest_function_api_gateway_permission" {
-  count = "${length(var.function_key_map)}"
+  count = "${length(keys(var.function_key_map))}"
 
   statement_id = "${var.cluster_name}_${element(keys(var.function_key_map), count.index)}_allow_execution_from_gateway"
 
@@ -26,7 +26,7 @@ resource "aws_lambda_permission" "rest_function_api_gateway_permission" {
 }
 
 resource "aws_lambda_permission" "rest_function_release_bucket_permission" {
-  count = "${length(var.function_key_map)}"
+  count = "${length(keys(var.function_key_map))}"
 
   statement_id = "${var.cluster_name}_${element(keys(var.function_key_map), count.index)}_release_bucket_permission"
 
