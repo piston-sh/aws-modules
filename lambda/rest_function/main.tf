@@ -18,7 +18,7 @@ resource "aws_lambda_permission" "rest_function_api_gateway_permission" {
   statement_id = "${var.cluster_name}_${element(keys(var.function_key_map), count.index)}_allow_execution_from_gateway"
 
   action        = "lambda:InvokeFunction"
-  function_name = "${aws_lambda_function.rest_function.*.function_name}"
+  function_name = "${element(aws_lambda_function.rest_function.*.function_name, count.index)}"
 
   principal = "apigateway.amazonaws.com"
 
@@ -31,7 +31,7 @@ resource "aws_lambda_permission" "rest_function_release_bucket_permission" {
   statement_id = "${var.cluster_name}_${element(keys(var.function_key_map), count.index)}_release_bucket_permission"
 
   action        = "lambda:InvokeFunction"
-  function_name = "${aws_lambda_function.rest_function.*.arn}"
+  function_name = "${element(aws_lambda_function.rest_function.*.arn, count.index)}"
 
   principal  = "s3.amazonaws.com"
   source_arn = "${var.s3_bucket_arn}"
