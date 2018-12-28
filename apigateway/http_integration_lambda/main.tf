@@ -6,7 +6,7 @@ resource "aws_api_gateway_integration" "http_resource_integration" {
   type        = "AWS"
 
   # Lambdas must always be invoked with a POST request
-  uri                     = "arn:aws:apigateway:${data.aws_region.current.name}:lambda:path/2015-03-31/functions${lookup(values(var.method_lambda_map), count.index)}/invocations"
+  uri                     = "arn:aws:apigateway:${data.aws_region.current.name}:lambda:path/2015-03-31/functions/${lookup(values(var.method_lambda_map), count.index)}/invocations"
   integration_http_method = "POST"
 }
 
