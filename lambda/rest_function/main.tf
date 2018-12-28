@@ -1,6 +1,6 @@
 resource "aws_lambda_function" "rest_function" {
   count = "${length(var.function_key_map)}"
-  
+
   s3_bucket = "${var.s3_bucket_id}"
   s3_key    = "${lookup(values(var.function_key_map), count.index)}"
 
