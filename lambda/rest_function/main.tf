@@ -1,8 +1,10 @@
 resource "aws_lambda_function" "rest_function" {
+  count = "${length(var.function_key_map)}"
+  
   s3_bucket = "${var.s3_bucket_id}"
-  s3_key    = "${var.s3_bucket_key}"
+  s3_key    = "${lookup(values(var.function_key_map), count.index)}"
 
-  function_name = "${var.cluster_name}_${var.function_name}"
+  function_name = "${var.cluster_name}_${lookup(keys(var.function_key_map), count.index)}"
   role          = "${aws_iam_role.lambda_role.arn}"
   handler       = "${var.handler}"
   timeout       = "${var.function_timeout}"
@@ -11,10 +13,12 @@ resource "aws_lambda_function" "rest_function" {
 }
 
 resource "aws_lambda_permission" "rest_function_api_gateway_permission" {
-  statement_id = "${var.cluster_name}_${var.function_name}_allow_execution_from_gateway"
+  count = "${length(var.function_key_map)}"
+
+  statement_id = "${var.cluster_name}_${lookup(keys(var.function_key_map), count.index)}_allow_execution_from_gateway"
 
   action        = "lambda:InvokeFunction"
-  function_name = "${aws_lambda_function.rest_function.function_name}"
+  function_name = "${aws_lambda_function.rest_function.*.function_name}"
 
   principal = "apigateway.amazonaws.com"
 
@@ -22,10 +26,12 @@ resource "aws_lambda_permission" "rest_function_api_gateway_permission" {
 }
 
 resource "aws_lambda_permission" "rest_function_release_bucket_permission" {
-  statement_id = "${var.cluster_name}_${var.function_name}_release_bucket_permission"
+  count = "${length(var.function_key_map)}"
+
+  statement_id = "${var.cluster_name}_${lookup(keys(var.function_key_map), count.index)}_release_bucket_permission"
 
   action        = "lambda:InvokeFunction"
-  function_name = "${aws_lambda_function.rest_function.arn}"
+  function_name = "${aws_lambda_function.rest_function.*.arn}"
 
   principal  = "s3.amazonaws.com"
   source_arn = "${var.s3_bucket_arn}"
