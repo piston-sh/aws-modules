@@ -31,7 +31,7 @@ resource "aws_api_gateway_integration_response" "http_resource_error_integration
   selection_pattern = ".*[ERROR].*"
 
   depends_on = [
-    "aws_api_gateway_integration.http_resource_integration",
+    "aws_api_gateway_integration.http_resource_integration_response",
   ]
 }
 
@@ -44,7 +44,7 @@ resource "aws_api_gateway_integration_response" "http_resource_forbidden_integra
   selection_pattern = ".*[FORBIDDEN].*"
 
   depends_on = [
-    "aws_api_gateway_integration.http_resource_integration",
+    "aws_api_gateway_integration.http_resource_error_integration_response",
   ]
 }
 
