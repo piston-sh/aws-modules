@@ -3,7 +3,7 @@ resource "aws_lambda_function" "rest_function" {
   s3_bucket     = "${var.s3_bucket_id}"
   s3_key        = "${element(values(var.function_key_map), count.index)}"
   function_name = "${var.cluster_name}_${element(keys(var.function_key_map), count.index)}"
-  role          = "${aws_iam_role.lambda_role.arn}"
+  role          = "${element(aws_iam_role.lambda_role.*.arn, count.index)}"
   handler       = "${var.handler}"
   timeout       = "${var.function_timeout}"
   runtime       = "${var.runtime}"
