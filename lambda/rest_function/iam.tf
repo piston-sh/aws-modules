@@ -1,6 +1,6 @@
 resource "aws_iam_role" "lambda_role" {
   count = "${length(keys(var.function_key_map))}"
-  name  = "${element(aws_lambda_function.rest_function.*.function_name, count.index)}_lambda_role"
+  name  = "${element(keys(var.function_key_map), count.index)}_lambda_role"
 
   assume_role_policy = <<EOF
 {
