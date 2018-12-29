@@ -20,7 +20,7 @@ resource "aws_api_gateway_method_response" "response_200" {
   }
 
   depends_on = [
-    "aws_api_gateway_method.http_resource_method"
+    "aws_api_gateway_method.http_resource_method.*"
   ]
 }
 
@@ -38,7 +38,7 @@ resource "aws_api_gateway_method_response" "response_500" {
   }
 
   depends_on = [
-    "aws_api_gateway_method.response_200"
+    "aws_api_gateway_method.response_200.*"
   ]
 }
 
@@ -56,6 +56,6 @@ resource "aws_api_gateway_method_response" "response_403" {
   }
 
   depends_on = [
-    "aws_api_gateway_method.response_500"
+    "aws_api_gateway_method.response_500.*"
   ]
 }
