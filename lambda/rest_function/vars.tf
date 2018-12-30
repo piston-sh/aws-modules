@@ -5,7 +5,7 @@ variable "s3_bucket_id" {}
 # TODO; test if we can merge these into one value
 variable "s3_bucket_arn" {}
 
-variable "function_key_map" {
+variable "method_function_map" {
   type = "map"
 }
 
