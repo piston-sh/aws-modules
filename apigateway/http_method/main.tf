@@ -1,4 +1,5 @@
 resource "aws_api_gateway_method" "http_resource_method" {
+  count         = "${var.enabled ? 1 : 0}"
   rest_api_id   = "${var.rest_api_id}"
   resource_id   = "${var.resource_id}"
   http_method   = "${var.http_method}"
@@ -6,6 +7,7 @@ resource "aws_api_gateway_method" "http_resource_method" {
 }
 
 resource "aws_api_gateway_method_response" "response_200" {
+  count       = "${var.enabled ? 1 : 0}"
   rest_api_id = "${var.rest_api_id}"
   resource_id = "${var.resource_id}"
   http_method = "${aws_api_gateway_method.http_resource_method.http_method}"
@@ -19,6 +21,7 @@ resource "aws_api_gateway_method_response" "response_200" {
 }
 
 resource "aws_api_gateway_method_response" "response_500" {
+  count       = "${var.enabled ? 1 : 0}"
   rest_api_id = "${var.rest_api_id}"
   resource_id = "${var.resource_id}"
   http_method = "${aws_api_gateway_method.http_resource_method.http_method}"
@@ -32,6 +35,7 @@ resource "aws_api_gateway_method_response" "response_500" {
 }
 
 resource "aws_api_gateway_method_response" "response_403" {
+  count       = "${var.enabled ? 1 : 0}"
   rest_api_id = "${var.rest_api_id}"
   resource_id = "${var.resource_id}"
   http_method = "${aws_api_gateway_method.http_resource_method.http_method}"
