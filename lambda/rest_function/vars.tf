@@ -9,6 +9,11 @@ variable "method_function_map" {
   type = "map"
 }
 
+variable "method_env_map" {
+  type    = "map"
+  default = {}
+}
+
 variable "handler" {
   default = "main"
 }
@@ -19,4 +24,9 @@ variable "runtime" {
 
 variable "function_timeout" {
   default = 300
+}
+
+variable "environment_variables" {
+  type    = "map"
+  default = {}
 }

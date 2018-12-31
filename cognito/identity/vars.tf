@@ -1,6 +1,10 @@
 variable "name" {}
 variable "identity_pool_name" {}
-variable "identity_pool_provider" {}
+
+variable "identity_pool_provider" {
+  default = ""
+}
+
 variable "lambda_s3_bucket" {}
 variable "lambda_s3_key" {}
 

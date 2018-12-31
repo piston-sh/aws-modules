@@ -7,6 +7,10 @@ resource "aws_lambda_function" "rest_function" {
   handler       = "${var.handler}"
   timeout       = "${var.function_timeout}"
   runtime       = "${var.runtime}"
+
+  environment {
+    variables = "${lookup(var.method_env_map, element(keys(var.method_env_map), count.index), map())}"
+  }
 }
 
 resource "aws_lambda_permission" "rest_function_api_gateway_permission" {
