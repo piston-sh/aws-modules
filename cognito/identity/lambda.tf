@@ -1,12 +1,3 @@
-module "lambda" {
-  source = "../../lambda/cognito_function"
-
-  identity_name = "${var.name}"
-  name          = "identity-register"
-  s3_bucket_id  = "${var.lambda_s3_bucket}"
-  s3_bucket_key = "${var.lambda_s3_key}"
-}
-
 resource "aws_lambda_function" "register_function" {
   s3_bucket     = "${var.lambda_s3_bucket_id}"
   s3_key        = "${var.lambda_s3_bucket_key}"
