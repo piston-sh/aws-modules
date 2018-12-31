@@ -11,7 +11,13 @@ variable "method_function_map" {
 
 variable "method_env_map" {
   type    = "map"
-  default = {}
+
+  default = {
+    "GET" = {}
+    "POST" = {}
+    "PUT" = {}
+    "DELETE" = {}
+  }
 }
 
 variable "handler" {
