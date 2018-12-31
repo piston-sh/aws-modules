@@ -26,5 +26,3 @@ resource "aws_lambda_permission" "rest_function_release_bucket_permission" {
   principal     = "s3.amazonaws.com"
   source_arn    = "${var.s3_bucket_arn}"
 }
-
-data "aws_region" "current" {}
