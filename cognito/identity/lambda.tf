@@ -11,7 +11,7 @@ resource "aws_lambda_function" "register_function" {
 resource "aws_lambda_permission" "register_function_permission" {
   action        = "lambda:InvokeFunction"
   statement_id  = "${var.name}_identity_register_allow_execution_from_cognito"
-  function_name = "${aws_lambda_function.function.arn}"
+  function_name = "${aws_lambda_function.register_function.arn}"
   principal     = "cognito-idp.amazonaws.com"
   source_arn    = "${aws_cognito_user_pool.user_pool.arn}"
 }

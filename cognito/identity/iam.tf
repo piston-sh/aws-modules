@@ -28,8 +28,8 @@ resource "aws_iam_policy" "lambda" {
 resource "aws_iam_policy_attachment" "lambda_attachment" {
   name = "${var.name}-identity-register"
 
-  policy_arn = "${aws_iam_policy.policy.arn}"
-  roles      = ["${aws_iam_role.role.name}"]
+  policy_arn = "${aws_iam_policy.lambda.arn}"
+  roles      = ["${aws_iam_role.lambda.name}"]
 }
 
 data "template_file" "cognito_policy" {
