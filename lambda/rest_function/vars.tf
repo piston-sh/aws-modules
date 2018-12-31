@@ -13,10 +13,18 @@ variable "method_env_map" {
   type    = "map"
 
   default = {
-    "GET" = {}
-    "POST" = {}
-    "PUT" = {}
-    "DELETE" = {}
+    "GET" = {
+      "PROVISIONER" = "terraform"
+    }
+    "POST" = {
+      "PROVISIONER" = "terraform"
+    }
+    "PUT" = {
+      "PROVISIONER" = "terraform"
+    }
+    "DELETE" = {
+      "PROVISIONER" = "terraform"
+    }
   }
 }
 
