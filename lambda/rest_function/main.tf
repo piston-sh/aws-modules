@@ -9,7 +9,7 @@ resource "aws_lambda_function" "rest_function" {
   runtime       = "${var.runtime}"
 
   environment {
-    variables = "${lookup(var.method_env_map, element(keys(var.method_env_map), count.index), map())}"
+    variables = "${var.method_env_map["${element(keys(var.method_env_map), count.index)}"]}"
   }
 }
 
