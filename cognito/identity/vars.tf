@@ -5,9 +5,6 @@ variable "identity_pool_provider" {
   default = ""
 }
 
-variable "lambda_s3_bucket" {}
-variable "lambda_s3_key" {}
-
 variable "allow_admin_create_user_only" {
   default = false
 }
@@ -30,4 +27,19 @@ variable "password_require_numbers" {
 
 variable "password_require_symbols" {
   default = false
+}
+
+variable "lambda_s3_bucket_id" {}
+variable "lambda_s3_bucket_key" {}
+
+variable "lambda_handler" {
+  default = "main"
+}
+
+variable "lambda_runtime" {
+  default = "go1.x"
+}
+
+variable "lambda_function_timeout" {
+  default = 300
 }

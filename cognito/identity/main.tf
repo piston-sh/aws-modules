@@ -1,12 +1,3 @@
-module "lambda" {
-  source = "../../lambda/cognito_function"
-
-  cognito_name  = "${var.name}"
-  name          = "identity-register"
-  s3_bucket_id  = "${var.lambda_s3_bucket}"
-  s3_bucket_key = "${var.lambda_s3_key}"
-}
-
 resource "aws_cognito_user_pool" "user_pool" {
   name = "${var.name}"
 
@@ -34,7 +25,7 @@ resource "aws_cognito_user_pool" "user_pool" {
   }
 
   lambda_config {
-    pre_sign_up = "${module.lambda.lambda_arn}"
+    pre_sign_up = "${aws_lambda_function.register_function.arn}"
   }
 
   lifecycle {

@@ -1,5 +1,6 @@
-variable "cognito_name" {}
+variable "identity_name" {}
 variable "name" {}
+variable "user_pool_arn" {}
 variable "s3_bucket_id" {}
 variable "s3_bucket_key" {}
 

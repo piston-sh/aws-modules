@@ -17,8 +17,18 @@ EOF
 
 resource "aws_iam_policy" "policy" {
   name_prefix = "${var.cognito_name}-${var.name}-"
+  policy      = "${data.template_file.policy.rendered}"
+}
 
-  policy = <<EOF
+resource "aws_iam_policy_attachment" "lambda_attachment" {
+  name = "${var.cognito_name}-${var.name}"
+
+  policy_arn = "${aws_iam_policy.policy.arn}"
+  roles      = ["${aws_iam_role.role.name}"]
+}
+
+data "template_file" "policy" {
+  template = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -36,16 +46,13 @@ resource "aws_iam_policy" "policy" {
       "Action": [
         "cognito-idp:ListUsers"
       ],
-      "Resource": "${aws_cognito_user_pool.user_pool.arn}"
+      "Resource": "${user_pool_arn}"
     }
   ]
 }
 EOF
-}
 
-resource "aws_iam_policy_attachment" "lambda_attachment" {
-  name = "${var.cognito_name}-${var.name}"
-
-  policy_arn = "${aws_iam_policy.policy.arn}"
-  roles      = ["${aws_iam_role.role.name}"]
+  vars {
+    user_pool_arn = "${aws_cognito_user_pool.user_pool.arn}"
+  }
 }
