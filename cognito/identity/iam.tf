@@ -44,7 +44,7 @@ data "template_file" "cognito_policy" {
     "Action": "sts:AssumeRoleWithWebIdentity",
     "Condition": {
       "StringEquals": {
-        "cognito-identity.amazonaws.com:aud": "${identity_pool_id}"
+        "cognito-identity.amazonaws.com:aud": "$${identity_pool_id}"
       },
       "ForAnyValue:StringLike": {
         "cognito-identity.amazonaws.com:amr": "authenticated"
@@ -78,7 +78,7 @@ data "template_file" "lambda_policy" {
       "Action": [
         "cognito-idp:ListUsers"
       ],
-      "Resource": "${user_pool_arn}"
+      "Resource": "$${user_pool_arn}"
     }
   ]
 }
