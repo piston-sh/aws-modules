@@ -2,9 +2,9 @@ resource "aws_lambda_function" "rest_function" {
   count         = "${length(keys(var.method_function_map))}"
   s3_bucket     = "${var.s3_bucket_id}"
   s3_key        = "${element(values(var.method_function_map), count.index)}"
-  function_name = "${var.cluster_name}_${lower(element(keys(var.method_function_map), count.index))}"
+  function_name = "${var.cluster_name}_${var.group_name}_${lower(element(keys(var.method_function_map), count.index))}"
   role          = "${element(aws_iam_role.lambda_role.*.arn, count.index)}"
-  handler       = "${var.runtime == "go1.x" ? lower(element(keys(var.method_function_map), count.index)) : var.handler}"
+  handler       = "${var.runtime == "go1.x" ? "${var.group_name}_${lower(element(keys(var.method_function_map), count.index))}" : var.handler}"
   timeout       = "${var.function_timeout}"
   runtime       = "${var.runtime}"
 

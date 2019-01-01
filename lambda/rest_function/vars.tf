@@ -1,4 +1,5 @@
 variable "cluster_name" {}
+variable "group_name" {}
 variable "rest_api_execution_arn" {}
 variable "s3_bucket_id" {}
 
