@@ -1,9 +1,9 @@
 resource "aws_lambda_function" "register_function" {
   s3_bucket     = "${var.lambda_s3_bucket_id}"
   s3_key        = "${var.lambda_s3_bucket_key}"
-  function_name = "${var.name}-identity-register"
+  function_name = "${var.name}_identity_register"
   role          = "${aws_iam_role.lambda.arn}"
-  handler       = "${var.lambda_handler}"
+  handler       = "${var.lambda_runtime == "go1.x" ? "${var.name}_identity_register" : var.lambda_handler}"
   timeout       = "${var.lambda_function_timeout}"
   runtime       = "${var.lambda_runtime}"
 }
