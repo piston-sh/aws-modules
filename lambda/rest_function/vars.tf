@@ -11,18 +11,21 @@ variable "method_function_map" {
 }
 
 variable "method_env_map" {
-  type    = "map"
+  type = "map"
 
   default = {
     "GET" = {
       "PROVISIONER" = "terraform"
     }
+
     "POST" = {
       "PROVISIONER" = "terraform"
     }
+
     "PUT" = {
       "PROVISIONER" = "terraform"
     }
+
     "DELETE" = {
       "PROVISIONER" = "terraform"
     }
@@ -44,4 +47,8 @@ variable "function_timeout" {
 variable "environment_variables" {
   type    = "map"
   default = {}
+}
+
+variable "enabled" {
+  default = true
 }
