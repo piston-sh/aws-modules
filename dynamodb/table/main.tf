@@ -1,4 +1,4 @@
-resource "aws_dynamodb_table" "submissions_table" {
+resource "aws_dynamodb_table" "table" {
   name = "${var.table_name}"
 
   read_capacity  = "${var.read_capacity}"
