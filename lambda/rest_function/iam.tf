@@ -33,7 +33,7 @@ resource "aws_iam_policy_attachment" "lambda_attachment" {
 }
 
 resource "aws_iam_policy_attachment" "lambda_custom_attachment" {
-  count      = "${var.enabled ? 1 : 0}"
+  count      = "${var.enabled && length(var.custom_policy_arn) > 0 ? 1 : 0}"
   name       = "custom_rest_function_policy_attachment"
   policy_arn = "${var.custom_policy_arn}"
   roles      = ["${aws_iam_role.lambda_role.*.name}"]
