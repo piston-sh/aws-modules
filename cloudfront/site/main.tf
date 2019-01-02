@@ -11,6 +11,10 @@ resource "aws_route53_record" "www" {
   }
 }
 
+resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
+  comment = "Restrict s3 buckets to cloudfront distribution only"
+}
+
 resource "aws_cloudfront_distribution" "distribution" {
   depends_on = [
     "aws_s3_bucket.site_bucket",
@@ -22,6 +26,10 @@ resource "aws_cloudfront_distribution" "distribution" {
     {
       domain_name = "${aws_s3_bucket.site_bucket.website_endpoint}"
       origin_id   = "SiteBucket"
+
+      s3_origin_config {
+        origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+      }
 
       custom_origin_config = {
         http_port              = "80"
