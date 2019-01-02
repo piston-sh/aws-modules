@@ -26,10 +26,16 @@ resource "aws_iam_policy" "lambda" {
 }
 
 resource "aws_iam_policy_attachment" "lambda_attachment" {
-  count = "${var.enabled ? 1 : 0}"
-  name  = "rest_function_policy_attachment-"
-
+  count      = "${var.enabled ? 1 : 0}"
+  name       = "rest_function_policy_attachment"
   policy_arn = "${aws_iam_policy.lambda.arn}"
+  roles      = ["${aws_iam_role.lambda_role.*.name}"]
+}
+
+resource "aws_iam_policy_attachment" "lambda_custom_attachment" {
+  count      = "${var.enabled ? length(keys(var.method_policy_map)) : 0}"
+  name       = "${lower(element(keys(var.method_policy_map), count.index))}_rest_function_policy_attachment"
+  policy_arn = "${element(values(var.method_policy_map), count.index)}"
   roles      = ["${aws_iam_role.lambda_role.*.name}"]
 }
 

@@ -10,6 +10,17 @@ variable "method_function_map" {
   type = "map"
 }
 
+variable "method_policy_map" {
+  type = "map"
+
+  default = {
+    "GET"    = ""
+    "POST"   = ""
+    "PUT"    = ""
+    "DELETE" = ""
+  }
+}
+
 variable "method_env_map" {
   type = "map"
 
