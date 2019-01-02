@@ -22,7 +22,7 @@ EOF
 resource "aws_iam_policy" "lambda" {
   count       = "${var.enabled ? 1 : 0}"
   name_prefix = "rest_function_policy-"
-  policy      = "${data.template_file.lambda_policy.rendered}"
+  policy      = "${data.template_file.lambda_policy.json}"
 }
 
 resource "aws_iam_policy_attachment" "lambda_attachment" {
@@ -39,21 +39,14 @@ resource "aws_iam_policy_attachment" "lambda_custom_attachment" {
   roles      = ["${aws_iam_role.lambda_role.*.name}"]
 }
 
-data "template_file" "lambda_policy" {
-  template = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "logs:CreateLogGroup",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-      ],
-      "Resource": "arn:aws:logs:*:*:*"
-    }
-  ]
-}
-EOF
+data "aws_iam_policy_document" "lambda_policy" {
+  statement {
+    actions = [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+    ]
+
+    resources = ["arn:aws:logs:*:*:*"]
+  }
 }

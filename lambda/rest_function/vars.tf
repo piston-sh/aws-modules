@@ -12,13 +12,6 @@ variable "method_function_map" {
 
 variable "method_policy_map" {
   type = "map"
-
-  default = {
-    "GET"    = ""
-    "POST"   = ""
-    "PUT"    = ""
-    "DELETE" = ""
-  }
 }
 
 variable "method_env_map" {
