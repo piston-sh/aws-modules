@@ -22,7 +22,7 @@ EOF
 resource "aws_iam_policy" "lambda" {
   count       = "${var.enabled ? 1 : 0}"
   name_prefix = "rest_function_policy-"
-  policy      = "${data.template_file.lambda_policy.json}"
+  policy      = "${data.aws_iam_policy_document.lambda_policy.json}"
 }
 
 resource "aws_iam_policy_attachment" "lambda_attachment" {
