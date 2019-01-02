@@ -10,11 +10,6 @@ variable "method_function_map" {
   type = "map"
 }
 
-variable "method_policy_map" {
-  type    = "map"
-  default = {}
-}
-
 variable "method_env_map" {
   type = "map"
 
@@ -35,6 +30,10 @@ variable "method_env_map" {
       "PROVISIONER" = "terraform"
     }
   }
+}
+
+variable "custom_policy_arn" {
+  default = ""
 }
 
 variable "handler" {
