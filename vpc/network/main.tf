@@ -39,7 +39,7 @@ resource "aws_route" "public_gateway_route" {
 }
 
 resource "aws_eip" "nat_eip" {
-  count = "${length(var.private_subnet_cidrs)}"
+  count = "${var.nat_gateway_enabled ? length(var.private_subnet_cidrs) : 0}"
   vpc   = true
 
   depends_on = [
@@ -52,7 +52,7 @@ resource "aws_eip" "nat_eip" {
 }
 
 resource "aws_nat_gateway" "private_nat" {
-  count         = "${length(var.private_subnet_cidrs)}"
+  count         = "${var.nat_gateway_enabled ? length(var.private_subnet_cidrs) : 0}"
   allocation_id = "${element(aws_eip.nat_eip.*.id, count.index)}"
 
   // always route through the first public subnet
@@ -68,7 +68,7 @@ resource "aws_nat_gateway" "private_nat" {
 }
 
 resource "aws_route" "private_nat_route" {
-  count                  = "${length(var.private_subnet_cidrs)}"
+  count                  = "${var.nat_gateway_enabled ? length(var.private_subnet_cidrs) : 0}"
   route_table_id         = "${element(module.private_subnet.route_table_ids, count.index)}"
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = "${aws_nat_gateway.private_nat.id}"

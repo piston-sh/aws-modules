@@ -16,3 +16,7 @@ variable "availability_zones" {
 variable "destination_cidr_block" {
   default = "0.0.0.0/0"
 }
+
+variable "nat_gateway_enabled" {
+  default = true
+}
