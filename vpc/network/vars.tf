@@ -20,3 +20,15 @@ variable "destination_cidr_block" {
 variable "nat_gateway_enabled" {
   default = true
 }
+
+variable "use_nat_instance" {
+  default = false
+}
+
+variable "instance_type" {
+  default = "t2.nano"
+}
+
+variable "ssh_key_name" {
+  default = ""
+}
