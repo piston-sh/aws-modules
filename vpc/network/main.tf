@@ -125,6 +125,7 @@ data "template_file" "user_data" {
     mysubnet          = "${module.public_subnet.subnet_ids[0]}"
     vpc_cidr          = "${module.vpc.cidr_block}"
     awsnycast_deb_url = "https://github.com/bobtfish/AWSnycast/releases/download/v0.1.5/awsnycast_0.1.5-425_amd64.deb"
+    igw               = "${aws_internet_gateway.gateway.id}"
   }
 }
 
