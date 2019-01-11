@@ -48,7 +48,7 @@ write_files:
                           - type: by_tag_regexp
                             config:
                                 key: Name
-                                regexp: ${name}
+                                regexp: ${name}-private
                 manage_routes:
                   - cidr: 0.0.0.0/0
                     instance: SELF

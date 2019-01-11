@@ -8,7 +8,7 @@ module "vpc" {
 module "public_subnet" {
   source = "../subnet"
 
-  name               = "${var.name}"
+  name               = "${var.name}-public"
   vpc_id             = "${module.vpc.vpc_id}"
   cidr_blocks        = "${var.public_subnet_cidrs}"
   availability_zones = "${var.availability_zones}"
@@ -17,7 +17,7 @@ module "public_subnet" {
 module "private_subnet" {
   source = "../subnet"
 
-  name               = "${var.name}"
+  name               = "${var.name}-private"
   vpc_id             = "${module.vpc.vpc_id}"
   cidr_blocks        = "${var.private_subnet_cidrs}"
   availability_zones = "${var.availability_zones}"

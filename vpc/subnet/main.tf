@@ -5,7 +5,7 @@ resource "aws_subnet" "subnet" {
   availability_zone = "${element(var.availability_zones, count.index % length(var.availability_zones))}"
 
   tags {
-    name = "${var.name}"
+    Name = "${var.name}"
   }
 }
 
@@ -14,7 +14,7 @@ resource "aws_route_table" "route_table" {
   vpc_id = "${var.vpc_id}"
 
   tags {
-    name = "${var.name}"
+    Name = "${var.name}"
   }
 }
 
