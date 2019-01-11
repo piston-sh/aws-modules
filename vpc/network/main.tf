@@ -96,15 +96,16 @@ resource "aws_security_group" "nat_security_group" {
 }
 
 resource "aws_instance" "nat_instance" {
-  count                  = "${var.nat_gateway_enabled && var.use_nat_instance ? 1 : 0}"
-  ami                    = "${data.aws_ami.ami.id}"
-  instance_type          = "${var.instance_type}"
-  source_dest_check      = false
-  iam_instance_profile   = "${aws_iam_instance_profile.nat_profile.id}"
-  key_name               = "${var.ssh_key_name}"
-  subnet_id              = "${module.public_subnet.subnet_ids[0]}"
-  vpc_security_group_ids = ["${aws_security_group.nat_security_group.id}"]
-  user_data              = "${data.template_file.user_data.rendered}"
+  count                       = "${var.nat_gateway_enabled && var.use_nat_instance ? 1 : 0}"
+  ami                         = "${data.aws_ami.ami.id}"
+  instance_type               = "${var.instance_type}"
+  source_dest_check           = false
+  iam_instance_profile        = "${aws_iam_instance_profile.nat_profile.id}"
+  key_name                    = "${var.ssh_key_name}"
+  subnet_id                   = "${module.public_subnet.subnet_ids[0]}"
+  vpc_security_group_ids      = ["${aws_security_group.nat_security_group.id}"]
+  user_data                   = "${data.template_file.user_data.rendered}"
+  associate_public_ip_address = true
 
   tags = {
     Name = "nat"
