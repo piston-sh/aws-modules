@@ -78,6 +78,10 @@ resource "aws_cloudfront_distribution" "distribution" {
   tags {
     terraform = "true"
   }
+
+  depends_on = [
+    "aws_s3_bucket.site_bucket"
+  ]
 }
 
 data "aws_route53_zone" "hosted_zone" {
