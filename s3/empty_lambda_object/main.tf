@@ -7,6 +7,6 @@ resource "aws_s3_bucket_object" "object" {
 
 data "archive_file" "archive" {
   type        = "zip"
-  source_dir  = "${path.module}/../../placeholder/empty_function"
-  output_path = "${path.module}/../../placeholder/${var.filename}"
+  source_dir  = "${path.module}/files/empty_function"
+  output_path = "${path.module}/files/${var.filename}"
 }
