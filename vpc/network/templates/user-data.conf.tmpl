@@ -26,16 +26,6 @@ write_files:
                 fall: 10
                 every: 1
         routetables:
-             my_az:
-                find:
-                    type: subnet
-                    config:
-                        subnet_id: ${mysubnet}
-                manage_routes:
-                   - cidr: 0.0.0.0/0
-                     instance: ${igw}
-                     healthcheck: public
-                     never_delete: true
              other_azs:
                 find:
                     type: and
