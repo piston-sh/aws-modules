@@ -29,6 +29,10 @@ variable "instance_type" {
   default = "t2.nano"
 }
 
+variable "instance_ami_id" {
+  default = ""
+}
+
 variable "ssh_key_name" {
   default = ""
 }
