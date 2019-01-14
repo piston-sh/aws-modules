@@ -1,6 +1,6 @@
 resource "aws_iam_role" "lambda_role" {
   count       = "${var.enabled ? length(keys(var.method_function_map)) : 0}"
-  name_prefix = "${element(keys(var.method_function_map), count.index)}_lambda_role-"
+  name_prefix = "${var.group_name}_${element(keys(var.method_function_map), count.index)}-"
 
   assume_role_policy = <<EOF
 {
@@ -21,7 +21,7 @@ EOF
 
 resource "aws_iam_policy" "lambda" {
   count       = "${var.enabled ? 1 : 0}"
-  name_prefix = "rest_function_policy-"
+  name_prefix = "${var.group_name}-"
   policy      = "${data.aws_iam_policy_document.lambda_policy.json}"
 }
 
