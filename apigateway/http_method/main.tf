@@ -6,8 +6,8 @@ resource "aws_api_gateway_method" "http_resource_method" {
   authorization = "${length(var.cognito_authorizer_id) > 0 ? "COGNITO_USER_POOLS" : "NONE"}"
   authorizer_id = "${length(var.cognito_authorizer_id) > 0 ? "${var.cognito_authorizer_id}" : ""}"
 
-  request_parameters {
-    "method.request.header.Authorization" = "${length(var.cognito_authorizer_id) > 0 ? "true" : "false"}"
+  request_parameters = {
+    "method.request.header.Authorization" = "${length(var.cognito_authorizer_id) > 0 ? true : false}"
   }
 }
 
