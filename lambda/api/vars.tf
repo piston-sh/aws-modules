@@ -75,3 +75,19 @@ variable "delete_request_params" {
   type    = "list"
   default = []
 }
+
+variable "get_request_template" {
+  default = "{}"
+}
+
+variable "post_request_template" {
+  default = "{}"
+}
+
+variable "put_request_template" {
+  default = "{}"
+}
+
+variable "delete_request_template" {
+  default = "{}"
+}

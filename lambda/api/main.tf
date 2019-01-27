@@ -50,6 +50,8 @@ module "get_integration" {
     formatlist("integration.%s", var.get_request_params),
     formatlist("method.%s", var.get_request_params),
   )}"
+
+  json_request_template = "${var.get_request_template}"
 }
 
 module "post_method" {
@@ -81,6 +83,8 @@ module "post_integration" {
     formatlist("integration.%s", var.post_request_params),
     formatlist("method.%s", var.post_request_params),
   )}"
+
+  json_request_template = "${var.post_request_template}"
 }
 
 module "put_method" {
@@ -112,6 +116,8 @@ module "put_integration" {
     formatlist("integration.%s", var.put_request_params),
     formatlist("method.%s", var.put_request_params),
   )}"
+
+  json_request_template = "${var.put_request_template}"
 }
 
 module "delete_method" {
@@ -143,4 +149,6 @@ module "delete_integration" {
     formatlist("integration.%s", var.delete_request_params),
     formatlist("method.%s", var.delete_request_params),
   )}"
+
+  json_request_template = "${var.delete_request_template}"
 }

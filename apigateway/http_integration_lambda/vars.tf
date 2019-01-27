@@ -15,3 +15,7 @@ variable "custom_request_parameters" {
   type    = "map"
   default = {}
 }
+
+variable "json_request_template" {
+  default = "{}"
+}
