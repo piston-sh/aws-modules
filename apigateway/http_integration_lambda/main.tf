@@ -10,7 +10,7 @@ resource "aws_api_gateway_integration" "http_resource_integration" {
   integration_http_method = "POST"
 
   request_parameters = {
-      "integration.request.header.Authorization" = "method.request.header.Authorization"
+    "integration.request.header.Authorization" = "method.request.header.Authorization"
   }
 }
 
