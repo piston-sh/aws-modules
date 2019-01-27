@@ -32,7 +32,7 @@ module "get_method" {
 
   custom_request_parameters = "${zipmap(
     formatlist("method.%s", var.get_request_params),
-    split(",", replace(join(",", var.get_request_params), "/.*/", "true")),
+    compact(split(",", replace(join(",", var.get_request_params), "/.+/", "true"))),
   )}"
 }
 
@@ -63,7 +63,7 @@ module "post_method" {
 
   custom_request_parameters = "${zipmap(
     formatlist("method.%s", var.post_request_params),
-    split(",", replace(join(",", var.post_request_params), "/.*/", "true")),
+    compact(split(",", replace(join(",", var.post_request_params), "/.+/", "true"))),
   )}"
 }
 
@@ -94,7 +94,7 @@ module "put_method" {
 
   custom_request_parameters = "${zipmap(
     formatlist("method.%s", var.put_request_params),
-    split(",", replace(join(",", var.put_request_params), "/.*/", "true")),
+    compact(split(",", replace(join(",", var.put_request_params), "/.+/", "true"))),
   )}"
 }
 
@@ -125,7 +125,7 @@ module "delete_method" {
 
   custom_request_parameters = "${zipmap(
     formatlist("method.%s", var.delete_request_params),
-    split(",", replace(join(",", var.delete_request_params), "/.*/", "true")),
+    compact(split(",", replace(join(",", var.delete_request_params), "/.+/", "true"))),
   )}"
 }
 
