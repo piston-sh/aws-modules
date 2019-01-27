@@ -12,3 +12,8 @@ variable "enabled" {
 variable "cognito_authorizer_id" {
   default = ""
 }
+
+variable "custom_request_parameters" {
+  type    = "map"
+  default = {}
+}

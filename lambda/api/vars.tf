@@ -17,6 +17,18 @@ variable "s3_bucket_arn" {
   default = ""
 }
 
+variable "custom_policy_arn" {
+  default = ""
+}
+
+variable "root_resource_id" {
+  default = ""
+}
+
+variable "cognito_authorizer_id" {
+  default = ""
+}
+
 variable "method_function_map" {
   type    = "map"
   default = {}
@@ -48,21 +60,9 @@ variable "method_request_params_map" {
   type = "map"
 
   default = {
-    "GET"    = {}
-    "POST"   = {}
-    "PUT"    = {}
-    "DELETE" = {}
+    "GET"    = []
+    "POST"   = []
+    "PUT"    = []
+    "DELETE" = []
   }
-}
-
-variable "custom_policy_arn" {
-  default = ""
-}
-
-variable "root_resource_id" {
-  default = ""
-}
-
-variable "cognito_authorizer_id" {
-  default = ""
 }

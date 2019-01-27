@@ -24,11 +24,12 @@ module "resource" {
 module "get_method" {
   source = "github.com/piston-sh/tf-aws-modules/apigateway/http_method"
 
-  enabled               = "${contains(keys(var.method_function_map), "GET")}"
-  rest_api_id           = "${var.rest_api_id}"
-  resource_id           = "${module.resource.resource_id}"
-  http_method           = "GET"
-  cognito_authorizer_id = "${var.cognito_authorizer_id}"
+  enabled                   = "${contains(keys(var.method_function_map), "GET")}"
+  rest_api_id               = "${var.rest_api_id}"
+  resource_id               = "${module.resource.resource_id}"
+  http_method               = "GET"
+  cognito_authorizer_id     = "${var.cognito_authorizer_id}"
+  custom_request_parameters = "${zipmap(formatlist("method.%s", lookup(var.method_request_params_map, "GET", list())), formatlist("true", lookup(var.method_request_params_map, "GET", list())))}"
 }
 
 module "get_integration" {
@@ -40,7 +41,7 @@ module "get_integration" {
   http_method               = "GET"
   lambda_arn                = "${lookup(module.lambda_functions.lambda_arns, "GET", "")}"
   auth_enabled              = "${length(var.cognito_authorizer_id) > 0}"
-  custom_request_parameters = "${lookup(var.method_request_params_map, "GET", map())}"
+  custom_request_parameters = "${zipmap(formatlist("integration.%s", lookup(var.method_request_params_map, "GET", list())), formatlist("method.%s", lookup(var.method_request_params_map, "GET", list())))}"
 }
 
 module "post_method" {
