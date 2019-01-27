@@ -5,7 +5,7 @@ resource "aws_api_gateway_method" "http_resource_method" {
   http_method        = "${var.http_method}"
   authorization      = "${length(var.cognito_authorizer_id) > 0 ? "COGNITO_USER_POOLS" : "NONE"}"
   authorizer_id      = "${length(var.cognito_authorizer_id) > 0 ? "${var.cognito_authorizer_id}" : ""}"
-  request_parameters = "${zipmap(concat(split(",", length(var.cognito_authorizer_id) > 0 ? "method.request.header.Authorization" : ""), concat(list("method.request.header.Host")), split(",", length(var.cognito_authorizer_id) > 0 ? "true" : "")), list("true"))}"
+  request_parameters = "${zipmap(concat(split(",", length(var.cognito_authorizer_id) > 0 ? "method.request.header.Authorization" : ""), list("method.request.header.Host")), concat(split(",", length(var.cognito_authorizer_id) > 0 ? "true" : "")), list("true"))}"
 }
 
 resource "aws_api_gateway_method_response" "response_200" {
