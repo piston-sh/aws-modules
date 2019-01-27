@@ -34,12 +34,13 @@ module "get_method" {
 module "get_integration" {
   source = "github.com/piston-sh/tf-aws-modules/apigateway/http_integration_lambda"
 
-  enabled      = "${contains(keys(var.method_function_map), "GET")}"
-  rest_api_id  = "${var.rest_api_id}"
-  resource_id  = "${module.resource.resource_id}"
-  http_method  = "GET"
-  lambda_arn   = "${lookup(module.lambda_functions.lambda_arns, "GET", "")}"
-  auth_enabled = "${length(var.cognito_authorizer_id) > 0}"
+  enabled                   = "${contains(keys(var.method_function_map), "GET")}"
+  rest_api_id               = "${var.rest_api_id}"
+  resource_id               = "${module.resource.resource_id}"
+  http_method               = "GET"
+  lambda_arn                = "${lookup(module.lambda_functions.lambda_arns, "GET", "")}"
+  auth_enabled              = "${length(var.cognito_authorizer_id) > 0}"
+  custom_request_parameters = "${lookup(var.method_request_params_map, "GET", map())}"
 }
 
 module "post_method" {
@@ -55,11 +56,13 @@ module "post_method" {
 module "post_integration" {
   source = "github.com/piston-sh/tf-aws-modules/apigateway/http_integration_lambda"
 
-  enabled     = "${contains(keys(var.method_function_map), "POST")}"
-  rest_api_id = "${var.rest_api_id}"
-  resource_id = "${module.resource.resource_id}"
-  http_method = "POST"
-  lambda_arn  = "${lookup(module.lambda_functions.lambda_arns, "POST", "")}"
+  enabled                   = "${contains(keys(var.method_function_map), "POST")}"
+  rest_api_id               = "${var.rest_api_id}"
+  resource_id               = "${module.resource.resource_id}"
+  http_method               = "POST"
+  lambda_arn                = "${lookup(module.lambda_functions.lambda_arns, "POST", "")}"
+  auth_enabled              = "${length(var.cognito_authorizer_id) > 0}"
+  custom_request_parameters = "${lookup(var.method_request_params_map, "POST", map())}"
 }
 
 module "put_method" {
@@ -75,11 +78,13 @@ module "put_method" {
 module "put_integration" {
   source = "github.com/piston-sh/tf-aws-modules/apigateway/http_integration_lambda"
 
-  enabled     = "${contains(keys(var.method_function_map), "PUT")}"
-  rest_api_id = "${var.rest_api_id}"
-  resource_id = "${module.resource.resource_id}"
-  http_method = "PUT"
-  lambda_arn  = "${lookup(module.lambda_functions.lambda_arns, "PUT", "")}"
+  enabled                   = "${contains(keys(var.method_function_map), "PUT")}"
+  rest_api_id               = "${var.rest_api_id}"
+  resource_id               = "${module.resource.resource_id}"
+  http_method               = "PUT"
+  lambda_arn                = "${lookup(module.lambda_functions.lambda_arns, "PUT", "")}"
+  auth_enabled              = "${length(var.cognito_authorizer_id) > 0}"
+  custom_request_parameters = "${lookup(var.method_request_params_map, "PUT", map())}"
 }
 
 module "delete_method" {
@@ -95,9 +100,11 @@ module "delete_method" {
 module "delete_integration" {
   source = "github.com/piston-sh/tf-aws-modules/apigateway/http_integration_lambda"
 
-  enabled     = "${contains(keys(var.method_function_map), "DELETE")}"
-  rest_api_id = "${var.rest_api_id}"
-  resource_id = "${module.resource.resource_id}"
-  http_method = "DELETE"
-  lambda_arn  = "${lookup(module.lambda_functions.lambda_arns, "DELETE", "")}"
+  enabled                   = "${contains(keys(var.method_function_map), "DELETE")}"
+  rest_api_id               = "${var.rest_api_id}"
+  resource_id               = "${module.resource.resource_id}"
+  http_method               = "DELETE"
+  lambda_arn                = "${lookup(module.lambda_functions.lambda_arns, "DELETE", "")}"
+  auth_enabled              = "${length(var.cognito_authorizer_id) > 0}"
+  custom_request_parameters = "${lookup(var.method_request_params_map, "DELETE", map())}"
 }

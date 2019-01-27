@@ -10,3 +10,8 @@ variable "enabled" {
 variable "auth_enabled" {
   default = false
 }
+
+variable "custom_request_parameters" {
+  type    = "map"
+  default = {}
+}

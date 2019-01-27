@@ -27,20 +27,31 @@ variable "method_env_map" {
 
   default = {
     "GET" = {
-      "PROVISIONER" = "terraform"
+      "EMPTY_VARIABLE" = "default_override_me"
     }
 
     "POST" = {
-      "PROVISIONER" = "terraform"
+      "EMPTY_VARIABLE" = "default_override_me"
     }
 
     "PUT" = {
-      "PROVISIONER" = "terraform"
+      "EMPTY_VARIABLE" = "default_override_me"
     }
 
     "DELETE" = {
-      "PROVISIONER" = "terraform"
+      "EMPTY_VARIABLE" = "default_override_me"
     }
+  }
+}
+
+variable "method_request_params_map" {
+  type = "map"
+
+  default = {
+    "GET"    = {}
+    "POST"   = {}
+    "PUT"    = {}
+    "DELETE" = {}
   }
 }
 
