@@ -6,3 +6,7 @@ variable "lambda_arn" {}
 variable "enabled" {
   default = true
 }
+
+variable "auth_enabled" {
+  default = false
+}

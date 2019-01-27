@@ -34,11 +34,12 @@ module "get_method" {
 module "get_integration" {
   source = "github.com/piston-sh/tf-aws-modules/apigateway/http_integration_lambda"
 
-  enabled     = "${contains(keys(var.method_function_map), "GET")}"
-  rest_api_id = "${var.rest_api_id}"
-  resource_id = "${module.resource.resource_id}"
-  http_method = "GET"
-  lambda_arn  = "${lookup(module.lambda_functions.lambda_arns, "GET", "")}"
+  enabled      = "${contains(keys(var.method_function_map), "GET")}"
+  rest_api_id  = "${var.rest_api_id}"
+  resource_id  = "${module.resource.resource_id}"
+  http_method  = "GET"
+  lambda_arn   = "${lookup(module.lambda_functions.lambda_arns, "GET", "")}"
+  auth_enabled = "${length(var.cognito_authorizer_id) > 0}"
 }
 
 module "post_method" {
