@@ -9,7 +9,7 @@ resource "aws_api_gateway_integration" "http_resource_integration" {
   uri                     = "arn:aws:apigateway:${data.aws_region.current.name}:lambda:path/2015-03-31/functions/${var.lambda_arn}/invocations"
   integration_http_method = "POST"
 
-  request_parameters = "${zipmap(split(",", var.auth_enabled ? "integration.request.header.Authorization" : ""), split(",", var.auth_enabled ? "method.request.header.Authorization" : ""))}"
+  request_parameters = "${zipmap(split(",", var.auth_enabled ? "integration.request.header.Authorization" : "integration.request.header.Host"), split(",", var.auth_enabled ? "method.request.header.Authorization" : "method.request.header.Host"))}"
 }
 
 resource "aws_api_gateway_integration_response" "http_resource_integration_response" {
