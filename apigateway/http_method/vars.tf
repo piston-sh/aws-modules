@@ -8,3 +8,7 @@ variable "http_method" {
 variable "enabled" {
   default = true
 }
+
+variable "cognito_authorizer_id" {
+  default = ""
+}

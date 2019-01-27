@@ -3,7 +3,8 @@ resource "aws_api_gateway_method" "http_resource_method" {
   rest_api_id   = "${var.rest_api_id}"
   resource_id   = "${var.resource_id}"
   http_method   = "${var.http_method}"
-  authorization = "NONE"
+  authorization = "${length(var.cognito_authorizer_id) > 0 ? "COGNITO_USER_POOLS" : "NONE"}"
+  authorizer_id = "${length(var.cognito_authorizer_id) > 0 ? "${var.cognito_authorizer_id}" : ""}"
 }
 
 resource "aws_api_gateway_method_response" "response_200" {
@@ -17,12 +18,6 @@ resource "aws_api_gateway_method_response" "response_200" {
     "method.response.header.Access-Control-Allow-Headers" = true
     "method.response.header.Access-Control-Allow-Methods" = true
     "method.response.header.Access-Control-Allow-Origin"  = true
-    "method.response.header.x-amzn-requestid"             = false
-    "method.response.header.x-amz-apigw-id"               = false
-    "method.response.header.x-amzn-trace-id"              = false
-    "method.response.header.x-amz-cf-id"                  = false
-    "method.response.header.x-cache"                      = false
-    "method.response.header.via"                          = false
   }
 
   depends_on = [
@@ -41,12 +36,6 @@ resource "aws_api_gateway_method_response" "response_500" {
     "method.response.header.Access-Control-Allow-Headers" = true
     "method.response.header.Access-Control-Allow-Methods" = true
     "method.response.header.Access-Control-Allow-Origin"  = true
-    "method.response.header.x-amzn-requestid"             = false
-    "method.response.header.x-amz-apigw-id"               = false
-    "method.response.header.x-amzn-trace-id"              = false
-    "method.response.header.x-amz-cf-id"                  = false
-    "method.response.header.x-cache"                      = false
-    "method.response.header.via"                          = false
   }
 
   depends_on = [
@@ -65,12 +54,6 @@ resource "aws_api_gateway_method_response" "response_403" {
     "method.response.header.Access-Control-Allow-Headers" = true
     "method.response.header.Access-Control-Allow-Methods" = true
     "method.response.header.Access-Control-Allow-Origin"  = true
-    "method.response.header.x-amzn-requestid"             = false
-    "method.response.header.x-amz-apigw-id"               = false
-    "method.response.header.x-amzn-trace-id"              = false
-    "method.response.header.x-amz-cf-id"                  = false
-    "method.response.header.x-cache"                      = false
-    "method.response.header.via"                          = false
   }
 
   depends_on = [
