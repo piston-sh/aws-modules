@@ -8,6 +8,10 @@ resource "aws_api_gateway_integration" "http_resource_integration" {
   # Lambdas must always be invoked with a POST request
   uri                     = "arn:aws:apigateway:${data.aws_region.current.name}:lambda:path/2015-03-31/functions/${var.lambda_arn}/invocations"
   integration_http_method = "POST"
+
+  request_parameters = {
+      "integration.request.header.Authorization" = "method.request.header.Authorization"
+  }
 }
 
 resource "aws_api_gateway_integration_response" "http_resource_integration_response" {
