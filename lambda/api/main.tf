@@ -31,8 +31,8 @@ module "get_method" {
   cognito_authorizer_id = "${var.cognito_authorizer_id}"
 
   custom_request_parameters = "${zipmap(
-    formatlist("method.%s", compact(split(",", contains(keys(var.method_request_params_map), "GET") ? join(",", var.method_request_params_map["GET"]) : ""))),
-    formatlist("true", compact(split(",", contains(keys(var.method_request_params_map), "GET") ? join(",", var.method_request_params_map["GET"]) : ""))),
+    formatlist("method.%s", var.get_request_params),
+    formatlist("true", var.get_request_params),
   )}"
 }
 
@@ -47,8 +47,8 @@ module "get_integration" {
   auth_enabled = "${length(var.cognito_authorizer_id) > 0}"
 
   custom_request_parameters = "${zipmap(
-    formatlist("integration.%s", compact(split(",", contains(keys(var.method_request_params_map), "GET") ? join(",", var.method_request_params_map["GET"]) : ""))),
-    formatlist("method.%s", compact(split(",", contains(keys(var.method_request_params_map), "GET") ? join(",", var.method_request_params_map["GET"]) : ""))),
+    formatlist("integration.%s", var.get_request_params),
+    formatlist("method.%s", var.get_request_params),
   )}"
 }
 
@@ -62,8 +62,8 @@ module "post_method" {
   cognito_authorizer_id = "${var.cognito_authorizer_id}"
 
   custom_request_parameters = "${zipmap(
-    formatlist("method.%s", compact(split(",", contains(keys(var.method_request_params_map), "POST") ? join(",", var.method_request_params_map["POST"]) : ""))),
-    formatlist("true", compact(split(",", contains(keys(var.method_request_params_map), "POST") ? join(",", var.method_request_params_map["POST"]) : ""))),
+    formatlist("method.%s", var.post_request_params),
+    formatlist("true", var.post_request_params),
   )}"
 }
 
@@ -78,8 +78,8 @@ module "post_integration" {
   auth_enabled = "${length(var.cognito_authorizer_id) > 0}"
 
   custom_request_parameters = "${zipmap(
-    formatlist("integration.%s", compact(split(",", contains(keys(var.method_request_params_map), "POST") ? join(",", var.method_request_params_map["POST"]) : ""))),
-    formatlist("method.%s", compact(split(",", contains(keys(var.method_request_params_map), "POST") ? join(",", var.method_request_params_map["POST"]) : ""))),
+    formatlist("integration.%s", var.post_request_params),
+    formatlist("method.%s", var.post_request_params),
   )}"
 }
 
@@ -93,8 +93,8 @@ module "put_method" {
   cognito_authorizer_id = "${var.cognito_authorizer_id}"
 
   custom_request_parameters = "${zipmap(
-    formatlist("method.%s", compact(split(",", (contains(keys(var.method_request_params_map), "PUT") ? join(",", var.method_request_params_map["PUT"]) : "")))),
-    formatlist("true", compact(split(",", (contains(keys(var.method_request_params_map), "PUT") ? join(",", var.method_request_params_map["PUT"]) : "")))),
+    formatlist("method.%s", var.put_request_params),
+    formatlist("true", var.put_request_params),
   )}"
 }
 
@@ -109,8 +109,8 @@ module "put_integration" {
   auth_enabled = "${length(var.cognito_authorizer_id) > 0}"
 
   custom_request_parameters = "${zipmap(
-    formatlist("integration.%s", compact(split(",", (contains(keys(var.method_request_params_map), "PUT") ? join(",", var.method_request_params_map["PUT"]) : "")))),
-    formatlist("method.%s", compact(split(",", (contains(keys(var.method_request_params_map), "PUT") ? join(",", var.method_request_params_map["PUT"]) : "")))),
+    formatlist("integration.%s", var.put_request_params),
+    formatlist("method.%s", var.put_request_params),
   )}"
 }
 
@@ -124,8 +124,8 @@ module "delete_method" {
   cognito_authorizer_id = "${var.cognito_authorizer_id}"
 
   custom_request_parameters = "${zipmap(
-    formatlist("method.%s", compact(split(",", contains(keys(var.method_request_params_map), "DELETE") ? join(",", var.method_request_params_map["DELETE"]) : ""))),
-    formatlist("true", compact(split(",", contains(keys(var.method_request_params_map), "DELETE") ? join(",", var.method_request_params_map["DELETE"]) : ""))),
+    formatlist("method.%s", var.delete_request_params),
+    formatlist("true", var.delete_request_params),
   )}"
 }
 
@@ -140,7 +140,7 @@ module "delete_integration" {
   auth_enabled = "${length(var.cognito_authorizer_id) > 0}"
 
   custom_request_parameters = "${zipmap(
-    formatlist("integration.%s", compact(split(",", contains(keys(var.method_request_params_map), "DELETE") ? join(",", var.method_request_params_map["DELETE"]) : ""))),
-    formatlist("method.%s", compact(split(",", contains(keys(var.method_request_params_map), "DELETE") ? join(",", var.method_request_params_map["DELETE"]) : ""))),
+    formatlist("integration.%s", var.delete_request_params),
+    formatlist("method.%s", var.delete_request_params),
   )}"
 }

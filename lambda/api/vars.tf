@@ -56,13 +56,22 @@ variable "method_env_map" {
   }
 }
 
-variable "method_request_params_map" {
-  type = "map"
+variable "get_request_params" {
+  type    = "list"
+  default = []
+}
 
-  default = {
-    "GET"    = []
-    "POST"   = []
-    "PUT"    = []
-    "DELETE" = []
-  }
+variable "post_request_params" {
+  type    = "list"
+  default = []
+}
+
+variable "put_request_params" {
+  type    = "list"
+  default = []
+}
+
+variable "delete_request_params" {
+  type    = "list"
+  default = []
 }
