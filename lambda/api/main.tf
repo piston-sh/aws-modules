@@ -24,10 +24,11 @@ module "resource" {
 module "get_method" {
   source = "github.com/piston-sh/tf-aws-modules/apigateway/http_method"
 
-  enabled     = "${contains(keys(var.method_function_map), "GET")}"
-  rest_api_id = "${var.rest_api_id}"
-  resource_id = "${module.resource.resource_id}"
-  http_method = "GET"
+  enabled               = "${contains(keys(var.method_function_map), "GET")}"
+  rest_api_id           = "${var.rest_api_id}"
+  resource_id           = "${module.resource.resource_id}"
+  http_method           = "GET"
+  cognito_authorizer_id = "${var.cognito_authorizer_id}"
 }
 
 module "get_integration" {
@@ -43,10 +44,11 @@ module "get_integration" {
 module "post_method" {
   source = "github.com/piston-sh/tf-aws-modules/apigateway/http_method"
 
-  enabled     = "${contains(keys(var.method_function_map), "POST")}"
-  rest_api_id = "${var.rest_api_id}"
-  resource_id = "${module.resource.resource_id}"
-  http_method = "POST"
+  enabled               = "${contains(keys(var.method_function_map), "POST")}"
+  rest_api_id           = "${var.rest_api_id}"
+  resource_id           = "${module.resource.resource_id}"
+  http_method           = "POST"
+  cognito_authorizer_id = "${var.cognito_authorizer_id}"
 }
 
 module "post_integration" {
@@ -62,10 +64,11 @@ module "post_integration" {
 module "put_method" {
   source = "github.com/piston-sh/tf-aws-modules/apigateway/http_method"
 
-  enabled     = "${contains(keys(var.method_function_map), "PUT")}"
-  rest_api_id = "${var.rest_api_id}"
-  resource_id = "${module.resource.resource_id}"
-  http_method = "PUT"
+  enabled               = "${contains(keys(var.method_function_map), "PUT")}"
+  rest_api_id           = "${var.rest_api_id}"
+  resource_id           = "${module.resource.resource_id}"
+  http_method           = "PUT"
+  cognito_authorizer_id = "${var.cognito_authorizer_id}"
 }
 
 module "put_integration" {
@@ -81,10 +84,11 @@ module "put_integration" {
 module "delete_method" {
   source = "github.com/piston-sh/tf-aws-modules/apigateway/http_method"
 
-  enabled     = "${contains(keys(var.method_function_map), "DELETE")}"
-  rest_api_id = "${var.rest_api_id}"
-  resource_id = "${module.resource.resource_id}"
-  http_method = "DELETE"
+  enabled               = "${contains(keys(var.method_function_map), "DELETE")}"
+  rest_api_id           = "${var.rest_api_id}"
+  resource_id           = "${module.resource.resource_id}"
+  http_method           = "DELETE"
+  cognito_authorizer_id = "${var.cognito_authorizer_id}"
 }
 
 module "delete_integration" {

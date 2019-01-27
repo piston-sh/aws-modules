@@ -51,3 +51,7 @@ variable "custom_policy_arn" {
 variable "root_resource_id" {
   default = ""
 }
+
+variable "cognito_authorizer_id" {
+  default = ""
+}
