@@ -24,91 +24,123 @@ module "resource" {
 module "get_method" {
   source = "github.com/piston-sh/tf-aws-modules/apigateway/http_method"
 
-  enabled                   = "${contains(keys(var.method_function_map), "GET")}"
-  rest_api_id               = "${var.rest_api_id}"
-  resource_id               = "${module.resource.resource_id}"
-  http_method               = "GET"
-  cognito_authorizer_id     = "${var.cognito_authorizer_id}"
-  custom_request_parameters = "${zipmap(compact(formatlist("method.%s", split(",", join(",", lookup(var.method_request_params_map, "GET", ""))))), compact(formatlist("true", split(",", join(",", lookup(var.method_request_params_map, "GET", ""))))))}"
+  enabled               = "${contains(keys(var.method_function_map), "GET")}"
+  rest_api_id           = "${var.rest_api_id}"
+  resource_id           = "${module.resource.resource_id}"
+  http_method           = "GET"
+  cognito_authorizer_id = "${var.cognito_authorizer_id}"
+
+  custom_request_parameters = "${zipmap(
+    formatlist("method.%s", compact(split(",", contains(keys(var.method_request_params_map), "GET") ? join(",", var.method_request_params_map["GET"]) : ""))),
+    formatlist("true", compact(split(",", contains(keys(var.method_request_params_map), "GET") ? join(",", var.method_request_params_map["GET"]) : ""))),
+  )}"
 }
 
 module "get_integration" {
   source = "github.com/piston-sh/tf-aws-modules/apigateway/http_integration_lambda"
 
-  enabled                   = "${contains(keys(var.method_function_map), "GET")}"
-  rest_api_id               = "${var.rest_api_id}"
-  resource_id               = "${module.resource.resource_id}"
-  http_method               = "GET"
-  lambda_arn                = "${lookup(module.lambda_functions.lambda_arns, "GET", "")}"
-  auth_enabled              = "${length(var.cognito_authorizer_id) > 0}"
-  custom_request_parameters = "${zipmap(compact(formatlist("integration.%s", split(",", join(",", lookup(var.method_request_params_map, "GET", ""))))), compact(formatlist("method.%s", lookup(var.method_request_params_map, "GET", ""))))}"
+  enabled      = "${contains(keys(var.method_function_map), "GET")}"
+  rest_api_id  = "${var.rest_api_id}"
+  resource_id  = "${module.resource.resource_id}"
+  http_method  = "GET"
+  lambda_arn   = "${lookup(module.lambda_functions.lambda_arns, "GET", "")}"
+  auth_enabled = "${length(var.cognito_authorizer_id) > 0}"
+
+  custom_request_parameters = "${zipmap(
+    formatlist("integration.%s", compact(split(",", contains(keys(var.method_request_params_map), "GET") ? join(",", var.method_request_params_map["GET"]) : ""))),
+    formatlist("method.%s", compact(split(",", contains(keys(var.method_request_params_map), "GET") ? join(",", var.method_request_params_map["GET"]) : ""))),
+  )}"
 }
 
 module "post_method" {
   source = "github.com/piston-sh/tf-aws-modules/apigateway/http_method"
 
-  enabled                   = "${contains(keys(var.method_function_map), "POST")}"
-  rest_api_id               = "${var.rest_api_id}"
-  resource_id               = "${module.resource.resource_id}"
-  http_method               = "POST"
-  cognito_authorizer_id     = "${var.cognito_authorizer_id}"
-  custom_request_parameters = "${zipmap(compact(formatlist("method.%s", split(",", join(",", lookup(var.method_request_params_map, "POST", ""))))), compact(formatlist("true", split(",", join(",", lookup(var.method_request_params_map, "POST", ""))))))}"
+  enabled               = "${contains(keys(var.method_function_map), "POST")}"
+  rest_api_id           = "${var.rest_api_id}"
+  resource_id           = "${module.resource.resource_id}"
+  http_method           = "POST"
+  cognito_authorizer_id = "${var.cognito_authorizer_id}"
+
+  custom_request_parameters = "${zipmap(
+    formatlist("method.%s", compact(split(",", contains(keys(var.method_request_params_map), "POST") ? join(",", var.method_request_params_map["POST"]) : ""))),
+    formatlist("true", compact(split(",", contains(keys(var.method_request_params_map), "POST") ? join(",", var.method_request_params_map["POST"]) : ""))),
+  )}"
 }
 
 module "post_integration" {
   source = "github.com/piston-sh/tf-aws-modules/apigateway/http_integration_lambda"
 
-  enabled                   = "${contains(keys(var.method_function_map), "POST")}"
-  rest_api_id               = "${var.rest_api_id}"
-  resource_id               = "${module.resource.resource_id}"
-  http_method               = "POST"
-  lambda_arn                = "${lookup(module.lambda_functions.lambda_arns, "POST", "")}"
-  auth_enabled              = "${length(var.cognito_authorizer_id) > 0}"
-  custom_request_parameters = "${zipmap(compact(formatlist("integration.%s", split(",", join(",", lookup(var.method_request_params_map, "POST", ""))))), compact(formatlist("method.%s", lookup(var.method_request_params_map, "POST", ""))))}"
+  enabled      = "${contains(keys(var.method_function_map), "POST")}"
+  rest_api_id  = "${var.rest_api_id}"
+  resource_id  = "${module.resource.resource_id}"
+  http_method  = "POST"
+  lambda_arn   = "${lookup(module.lambda_functions.lambda_arns, "POST", "")}"
+  auth_enabled = "${length(var.cognito_authorizer_id) > 0}"
+
+  custom_request_parameters = "${zipmap(
+    formatlist("integration.%s", compact(split(",", contains(keys(var.method_request_params_map), "POST") ? join(",", var.method_request_params_map["POST"]) : ""))),
+    formatlist("method.%s", compact(split(",", contains(keys(var.method_request_params_map), "POST") ? join(",", var.method_request_params_map["POST"]) : ""))),
+  )}"
 }
 
 module "put_method" {
   source = "github.com/piston-sh/tf-aws-modules/apigateway/http_method"
 
-  enabled                   = "${contains(keys(var.method_function_map), "PUT")}"
-  rest_api_id               = "${var.rest_api_id}"
-  resource_id               = "${module.resource.resource_id}"
-  http_method               = "PUT"
-  cognito_authorizer_id     = "${var.cognito_authorizer_id}"
-  custom_request_parameters = "${zipmap(compact(formatlist("method.%s", split(",", join(",", lookup(var.method_request_params_map, "PUT", ""))))), compact(formatlist("true", split(",", join(",", lookup(var.method_request_params_map, "PUT", ""))))))}"
+  enabled               = "${contains(keys(var.method_function_map), "PUT")}"
+  rest_api_id           = "${var.rest_api_id}"
+  resource_id           = "${module.resource.resource_id}"
+  http_method           = "PUT"
+  cognito_authorizer_id = "${var.cognito_authorizer_id}"
+
+  custom_request_parameters = "${zipmap(
+    formatlist("method.%s", compact(split(",", contains(keys(var.method_request_params_map), "PUT") ? join(",", var.method_request_params_map["PUT"]) : ""))),
+    formatlist("true", compact(split(",", contains(keys(var.method_request_params_map), "PUT") ? join(",", var.method_request_params_map["PUT"]) : ""))),
+  )}"
 }
 
 module "put_integration" {
   source = "github.com/piston-sh/tf-aws-modules/apigateway/http_integration_lambda"
 
-  enabled                   = "${contains(keys(var.method_function_map), "PUT")}"
-  rest_api_id               = "${var.rest_api_id}"
-  resource_id               = "${module.resource.resource_id}"
-  http_method               = "PUT"
-  lambda_arn                = "${lookup(module.lambda_functions.lambda_arns, "PUT", "")}"
-  auth_enabled              = "${length(var.cognito_authorizer_id) > 0}"
-  custom_request_parameters = "${zipmap(compact(formatlist("integration.%s", split(",", join(",", lookup(var.method_request_params_map, "PUT", ""))))), compact(formatlist("method.%s", lookup(var.method_request_params_map, "PUT", ""))))}"
+  enabled      = "${contains(keys(var.method_function_map), "PUT")}"
+  rest_api_id  = "${var.rest_api_id}"
+  resource_id  = "${module.resource.resource_id}"
+  http_method  = "PUT"
+  lambda_arn   = "${lookup(module.lambda_functions.lambda_arns, "PUT", "")}"
+  auth_enabled = "${length(var.cognito_authorizer_id) > 0}"
+
+  custom_request_parameters = "${zipmap(
+    formatlist("integration.%s", compact(split(",", contains(keys(var.method_request_params_map), "PUT") ? join(",", var.method_request_params_map["PUT"]) : ""))),
+    formatlist("method.%s", compact(split(",", contains(keys(var.method_request_params_map), "PUT") ? join(",", var.method_request_params_map["PUT"]) : ""))),
+  )}"
 }
 
 module "delete_method" {
   source = "github.com/piston-sh/tf-aws-modules/apigateway/http_method"
 
-  enabled                   = "${contains(keys(var.method_function_map), "DELETE")}"
-  rest_api_id               = "${var.rest_api_id}"
-  resource_id               = "${module.resource.resource_id}"
-  http_method               = "DELETE"
-  cognito_authorizer_id     = "${var.cognito_authorizer_id}"
-  custom_request_parameters = "${zipmap(compact(formatlist("method.%s", split(",", join(",", lookup(var.method_request_params_map, "DELETE", ""))))), compact(formatlist("true", split(",", join(",", lookup(var.method_request_params_map, "DELETE", ""))))))}"
+  enabled               = "${contains(keys(var.method_function_map), "DELETE")}"
+  rest_api_id           = "${var.rest_api_id}"
+  resource_id           = "${module.resource.resource_id}"
+  http_method           = "DELETE"
+  cognito_authorizer_id = "${var.cognito_authorizer_id}"
+
+  custom_request_parameters = "${zipmap(
+    formatlist("method.%s", compact(split(",", contains(keys(var.method_request_params_map), "DELETE") ? join(",", var.method_request_params_map["DELETE"]) : ""))),
+    formatlist("true", compact(split(",", contains(keys(var.method_request_params_map), "DELETE") ? join(",", var.method_request_params_map["DELETE"]) : ""))),
+  )}"
 }
 
 module "delete_integration" {
   source = "github.com/piston-sh/tf-aws-modules/apigateway/http_integration_lambda"
 
-  enabled                   = "${contains(keys(var.method_function_map), "DELETE")}"
-  rest_api_id               = "${var.rest_api_id}"
-  resource_id               = "${module.resource.resource_id}"
-  http_method               = "DELETE"
-  lambda_arn                = "${lookup(module.lambda_functions.lambda_arns, "DELETE", "")}"
-  auth_enabled              = "${length(var.cognito_authorizer_id) > 0}"
-  custom_request_parameters = "${zipmap(compact(formatlist("integration.%s", split(",", join(",", lookup(var.method_request_params_map, "DELETE", ""))))), compact(formatlist("method.%s", lookup(var.method_request_params_map, "DELETE", ""))))}"
+  enabled      = "${contains(keys(var.method_function_map), "DELETE")}"
+  rest_api_id  = "${var.rest_api_id}"
+  resource_id  = "${module.resource.resource_id}"
+  http_method  = "DELETE"
+  lambda_arn   = "${lookup(module.lambda_functions.lambda_arns, "DELETE", "")}"
+  auth_enabled = "${length(var.cognito_authorizer_id) > 0}"
+
+  custom_request_parameters = "${zipmap(
+    formatlist("integration.%s", compact(split(",", contains(keys(var.method_request_params_map), "DELETE") ? join(",", var.method_request_params_map["DELETE"]) : ""))),
+    formatlist("method.%s", compact(split(",", contains(keys(var.method_request_params_map), "DELETE") ? join(",", var.method_request_params_map["DELETE"]) : ""))),
+  )}"
 }
