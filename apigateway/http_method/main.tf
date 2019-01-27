@@ -17,6 +17,12 @@ resource "aws_api_gateway_method_response" "response_200" {
     "method.response.header.Access-Control-Allow-Headers" = true
     "method.response.header.Access-Control-Allow-Methods" = true
     "method.response.header.Access-Control-Allow-Origin"  = true
+    "method.response.header.x-amzn-requestid"             = false
+    "method.response.header.x-amz-apigw-id"               = false
+    "method.response.header.x-amzn-trace-id"              = false
+    "method.response.header.x-amz-cf-id"                  = false
+    "method.response.header.x-cache"                      = false
+    "method.response.header.via"                          = false
   }
 
   depends_on = [
@@ -35,6 +41,12 @@ resource "aws_api_gateway_method_response" "response_500" {
     "method.response.header.Access-Control-Allow-Headers" = true
     "method.response.header.Access-Control-Allow-Methods" = true
     "method.response.header.Access-Control-Allow-Origin"  = true
+    "method.response.header.x-amzn-requestid"             = false
+    "method.response.header.x-amz-apigw-id"               = false
+    "method.response.header.x-amzn-trace-id"              = false
+    "method.response.header.x-amz-cf-id"                  = false
+    "method.response.header.x-cache"                      = false
+    "method.response.header.via"                          = false
   }
 
   depends_on = [
@@ -53,6 +65,12 @@ resource "aws_api_gateway_method_response" "response_403" {
     "method.response.header.Access-Control-Allow-Headers" = true
     "method.response.header.Access-Control-Allow-Methods" = true
     "method.response.header.Access-Control-Allow-Origin"  = true
+    "method.response.header.x-amzn-requestid"             = false
+    "method.response.header.x-amz-apigw-id"               = false
+    "method.response.header.x-amzn-trace-id"              = false
+    "method.response.header.x-amz-cf-id"                  = false
+    "method.response.header.x-cache"                      = false
+    "method.response.header.via"                          = false
   }
 
   depends_on = [
