@@ -93,8 +93,8 @@ module "put_method" {
   cognito_authorizer_id = "${var.cognito_authorizer_id}"
 
   custom_request_parameters = "${zipmap(
-    formatlist("method.%s", compact(split(",", contains(keys(var.method_request_params_map), "PUT") ? join(",", var.method_request_params_map["PUT"]) : ""))),
-    formatlist("true", compact(split(",", contains(keys(var.method_request_params_map), "PUT") ? join(",", var.method_request_params_map["PUT"]) : ""))),
+    formatlist("method.%s", compact(split(",", (contains(keys(var.method_request_params_map), "PUT") ? join(",", var.method_request_params_map["PUT"]) : "")))),
+    formatlist("true", compact(split(",", (contains(keys(var.method_request_params_map), "PUT") ? join(",", var.method_request_params_map["PUT"]) : "")))),
   )}"
 }
 
@@ -109,8 +109,8 @@ module "put_integration" {
   auth_enabled = "${length(var.cognito_authorizer_id) > 0}"
 
   custom_request_parameters = "${zipmap(
-    formatlist("integration.%s", compact(split(",", contains(keys(var.method_request_params_map), "PUT") ? join(",", var.method_request_params_map["PUT"]) : ""))),
-    formatlist("method.%s", compact(split(",", contains(keys(var.method_request_params_map), "PUT") ? join(",", var.method_request_params_map["PUT"]) : ""))),
+    formatlist("integration.%s", compact(split(",", (contains(keys(var.method_request_params_map), "PUT") ? join(",", var.method_request_params_map["PUT"]) : "")))),
+    formatlist("method.%s", compact(split(",", (contains(keys(var.method_request_params_map), "PUT") ? join(",", var.method_request_params_map["PUT"]) : "")))),
   )}"
 }
 
