@@ -8,8 +8,8 @@ resource "aws_api_gateway_method" "http_resource_method" {
 
   request_parameters = "${merge(
     zipmap(
-      compact(concat(split(",", length(var.cognito_authorizer_id) > 0 ? "method.request.header.Authorization" : ""), list("method.request.header.Host"))), 
-      compact(concat(split(",", length(var.cognito_authorizer_id) > 0 ? "true" : ""), list("true")))
+      split(",", length(var.cognito_authorizer_id) > 0 ? "method.request.header.Authorization" : "method.request.header.Host"), 
+      list("true")
     ), 
     var.custom_request_parameters
   )}"
