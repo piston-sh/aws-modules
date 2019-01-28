@@ -17,3 +17,8 @@ variable "custom_request_parameters" {
   type    = "map"
   default = {}
 }
+
+variable "response_codes" {
+  type    = "list"
+  default = ["200", "400", "403", "500"]
+}

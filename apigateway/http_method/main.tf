@@ -15,48 +15,12 @@ resource "aws_api_gateway_method" "http_resource_method" {
   )}"
 }
 
-resource "aws_api_gateway_method_response" "response_200" {
-  count       = "${var.enabled ? 1 : 0}"
+resource "aws_api_gateway_method_response" "response" {
+  count       = "${var.enabled ? length(var.response_codes) : 0}"
   rest_api_id = "${var.rest_api_id}"
   resource_id = "${var.resource_id}"
   http_method = "${aws_api_gateway_method.http_resource_method.http_method}"
-  status_code = "200"
-
-  response_parameters = {
-    "method.response.header.Access-Control-Allow-Headers" = true
-    "method.response.header.Access-Control-Allow-Methods" = true
-    "method.response.header.Access-Control-Allow-Origin"  = true
-  }
-
-  depends_on = [
-    "aws_api_gateway_method.http_resource_method",
-  ]
-}
-
-resource "aws_api_gateway_method_response" "response_500" {
-  count       = "${var.enabled ? 1 : 0}"
-  rest_api_id = "${var.rest_api_id}"
-  resource_id = "${var.resource_id}"
-  http_method = "${aws_api_gateway_method.http_resource_method.http_method}"
-  status_code = "500"
-
-  response_parameters = {
-    "method.response.header.Access-Control-Allow-Headers" = true
-    "method.response.header.Access-Control-Allow-Methods" = true
-    "method.response.header.Access-Control-Allow-Origin"  = true
-  }
-
-  depends_on = [
-    "aws_api_gateway_method.http_resource_method",
-  ]
-}
-
-resource "aws_api_gateway_method_response" "response_403" {
-  count       = "${var.enabled ? 1 : 0}"
-  rest_api_id = "${var.rest_api_id}"
-  resource_id = "${var.resource_id}"
-  http_method = "${aws_api_gateway_method.http_resource_method.http_method}"
-  status_code = "403"
+  status_code = "${element(var.response_codes, count.index)}"
 
   response_parameters = {
     "method.response.header.Access-Control-Allow-Headers" = true
