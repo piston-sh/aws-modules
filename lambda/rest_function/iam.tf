@@ -28,7 +28,7 @@ resource "aws_iam_policy" "lambda" {
 resource "aws_iam_policy_attachment" "lambda_attachment" {
   count      = var.enabled ? 1 : 0
   name       = "rest_function_policy_attachment"
-  policy_arn = aws_iam_policy.lambda.arn[0]
+  policy_arn = aws_iam_policy.lambda[0].arn
   roles      = aws_iam_role.lambda_role.*.name
 }
 
