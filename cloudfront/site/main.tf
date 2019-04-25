@@ -22,7 +22,7 @@ resource "aws_cloudfront_distribution" "distribution" {
     domain_name = "${aws_s3_bucket.site_bucket.website_endpoint}"
     origin_id   = "SiteBucket"
 
-    custom_origin_config = {
+    custom_origin_config {
         http_port              = "80"
         https_port             = "443"
         origin_protocol_policy = "http-only"
@@ -41,7 +41,7 @@ resource "aws_cloudfront_distribution" "distribution" {
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = "SiteBucket"
 
-    forwarded_values = {
+    forwarded_values {
       query_string = false
 
       cookies = {
@@ -49,7 +49,7 @@ resource "aws_cloudfront_distribution" "distribution" {
       }
     }
 
-    lambda_function_association = {
+    lambda_function_association {
       event_type = "origin-request"
       lambda_arn = "${aws_lambda_function.lambda_at_edge.arn}:${aws_lambda_function.lambda_at_edge.version}"
     }
@@ -72,7 +72,7 @@ resource "aws_cloudfront_distribution" "distribution" {
     }
   }
 
-  tags {
+  tags = {
     terraform = "true"
   }
 
