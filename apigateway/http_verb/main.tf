@@ -19,7 +19,7 @@ resource "aws_api_gateway_method_response" "response" {
   count       = var.enabled ? length(var.response_codes) : 0
   rest_api_id = var.rest_api_id
   resource_id = var.resource_id
-  http_method = aws_api_gateway_method.http_resource_method.http_method[0]
+  http_method = aws_api_gateway_method.http_resource_method[0].http_method
   status_code = element(var.response_codes, count.index)
 
   response_parameters = {
