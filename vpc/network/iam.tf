@@ -1,11 +1,5 @@
-resource "aws_iam_instance_profile" "nat_profile" {
-  count       = "${var.nat_gateway_enabled && var.use_nat_instance ? 1 : 0}"
-  name_prefix = "${var.name}-nat-profile-"
-  role        = "${aws_iam_role.role.name}"
-}
-
 resource "aws_iam_role" "role" {
-  count       = "${var.nat_gateway_enabled && var.use_nat_instance ? 1 : 0}"
+  count       = var.nat_gateway_enabled && var.use_nat_instance ? 1 : 0
   name_prefix = "${var.name}-nat-role-"
   path        = "/"
 
@@ -24,10 +18,16 @@ resource "aws_iam_role" "role" {
 EOF
 }
 
+resource "aws_iam_instance_profile" "nat_profile" {
+  count       = var.nat_gateway_enabled && var.use_nat_instance ? 1 : 0
+  name_prefix = "${var.name}-nat-profile-"
+  role        = aws_iam_role.role[count.index].name
+}
+
 resource "aws_iam_role_policy" "modify_routes" {
-  count       = "${var.nat_gateway_enabled && var.use_nat_instance ? 1 : 0}"
+  count       = var.nat_gateway_enabled && var.use_nat_instance ? 1 : 0
   name_prefix = "${var.name}-nat-modify-routes-"
-  role        = "${aws_iam_role.role.id}"
+  role        = aws_iam_role.role[count.index].id
 
   policy = <<EOF
 {
