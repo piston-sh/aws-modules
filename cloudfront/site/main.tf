@@ -18,19 +18,17 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
 resource "aws_cloudfront_distribution" "distribution" {
   comment = "${var.comment}"
 
-  origin = [
-    {
-      domain_name = "${aws_s3_bucket.site_bucket.website_endpoint}"
-      origin_id   = "SiteBucket"
+  origin {
+    domain_name = "${aws_s3_bucket.site_bucket.website_endpoint}"
+    origin_id   = "SiteBucket"
 
-      custom_origin_config = {
+    custom_origin_config = {
         http_port              = "80"
         https_port             = "443"
         origin_protocol_policy = "http-only"
         origin_ssl_protocols   = ["TLSv1.1", "TLSv1.2"]
-      }
-    },
-  ]
+    }
+  }
 
   enabled             = true
   default_root_object = "index.html"
@@ -38,7 +36,7 @@ resource "aws_cloudfront_distribution" "distribution" {
   price_class = "PriceClass_100"
   aliases     = ["${length(var.subdomain) > 0 ? "${var.subdomain}.${var.root_domain}" : "${var.root_domain}" }"]
 
-  default_cache_behavior = {
+  default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = "SiteBucket"
@@ -62,7 +60,7 @@ resource "aws_cloudfront_distribution" "distribution" {
     max_ttl                = 86400
   }
 
-  viewer_certificate = {
+  viewer_certificate {
     acm_certificate_arn      = "${var.acm_certificate_arn}"
     minimum_protocol_version = "TLSv1"
     ssl_support_method       = "sni-only"
