@@ -6,7 +6,7 @@ resource "aws_security_group" "security_group_common" {
     create_before_destroy = true
   }
 
-  tags {
+  tags = {
     cluster        = "${var.cluster_name}"
     instance_group = "${var.instance_group}"
   }

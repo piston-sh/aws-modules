@@ -4,7 +4,7 @@ resource "aws_subnet" "subnet" {
   cidr_block        = "${element(var.cidr_blocks, count.index)}"
   availability_zone = "${element(var.availability_zones, count.index % length(var.availability_zones))}"
 
-  tags {
+  tags = {
     Name = "${var.name}"
   }
 }
@@ -13,7 +13,7 @@ resource "aws_route_table" "route_table" {
   count  = "${length(var.cidr_blocks)}"
   vpc_id = "${var.vpc_id}"
 
-  tags {
+  tags = {
     Name = "${var.name}"
   }
 }

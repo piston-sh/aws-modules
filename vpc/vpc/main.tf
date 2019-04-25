@@ -3,7 +3,7 @@ resource "aws_vpc" "vpc" {
   enable_dns_hostnames = false
   enable_dns_support   = true
 
-  tags {
+  tags = {
     name = "${var.name}"
   }
 }

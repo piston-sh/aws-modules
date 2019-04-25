@@ -11,7 +11,7 @@ resource "aws_s3_bucket" "site_bucket" {
     enabled = true
   }
 
-  tags {
+  tags = {
     name      = "${var.bucket_name}"
     terraform = "true"
   }
