@@ -100,11 +100,11 @@ resource "aws_instance" "nat_instance" {
   ami                         = var.instance_ami_id
   instance_type               = var.instance_type
   source_dest_check           = false
-  iam_instance_profile        = aws_iam_instance_profile.nat_profile.id
+  iam_instance_profile        = aws_iam_instance_profile.nat_profile[0].id
   key_name                    = var.ssh_key_name
   subnet_id                   = module.public_subnet.subnet_ids[0]
-  vpc_security_group_ids      = [aws_security_group.nat_security_group.id]
-  user_data                   = data.template_file.user_data.rendered
+  vpc_security_group_ids      = aws_security_group.nat_security_group.*.id
+  user_data                   = data.template_file.user_data[0].rendered
   associate_public_ip_address = true
 
   tags = {
