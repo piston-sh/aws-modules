@@ -16,10 +16,6 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
 }
 
 resource "aws_cloudfront_distribution" "distribution" {
-  depends_on = [
-    "aws_s3_bucket.site_bucket",
-  ]
-
   comment = "${var.comment}"
 
   origin = [
