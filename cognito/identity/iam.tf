@@ -54,7 +54,7 @@ data "template_file" "cognito_policy" {
 }
 EOF
 
-  vars {
+  vars = {
     identity_pool_id = "${aws_cognito_identity_pool.identity_pool.id}"
   }
 }
@@ -84,7 +84,7 @@ data "template_file" "lambda_policy" {
 }
 EOF
 
-  vars {
+  vars = {
     user_pool_arn = "${aws_cognito_user_pool.user_pool.arn}"
   }
 }
