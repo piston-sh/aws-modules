@@ -4,7 +4,7 @@ resource "aws_lambda_function" "lambda_at_edge" {
   role             = "${aws_iam_role.iam_role.arn}"
   handler          = "index.handler"
   runtime          = "nodejs6.10"
-  source_code_hash = "${base64sha256(file("${data.archive_file.lambda.output_path}"))}"
+  source_code_hash = "${filebase64sha256("${data.archive_file.lambda.output_path}")}"
   publish          = "true"
 }
 
