@@ -3,7 +3,7 @@ resource "aws_lambda_function" "lambda_at_edge" {
   function_name    = "${length(var.subdomain) > 0 ? "${var.subdomain}" : "root" }-cloudfront-lambda-at-edge"
   role             = "${aws_iam_role.iam_role.arn}"
   handler          = "index.handler"
-  runtime          = "nodejs6.10"
+  runtime          = "nodejs8.10"
   source_code_hash = "${filebase64sha256("${data.archive_file.lambda.output_path}")}"
   publish          = "true"
 }
