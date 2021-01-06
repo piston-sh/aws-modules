@@ -42,9 +42,7 @@ resource "aws_autoscaling_group" "asg" {
   force_delete         = true
   launch_configuration = aws_launch_configuration.launch_configuration.id
   default_cooldown     = var.default_cooldown
-
-  availability_zones = var.availability_zones
-
+  
   vpc_zone_identifier = var.subnet_ids
 
   tags = concat(var.custom_tags, local.default_tags)

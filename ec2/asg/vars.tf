@@ -5,10 +5,6 @@ variable "subnet_ids" {
   type = list(string)
 }
 
-variable "availability_zones" {
-  type = list(string)
-}
-
 variable "ami" {}
 variable "user_data" {}
 
