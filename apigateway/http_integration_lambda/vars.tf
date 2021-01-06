@@ -12,7 +12,7 @@ variable "auth_enabled" {
 }
 
 variable "custom_request_parameters" {
-  type    = "map"
+  type    = map
   default = {}
 }
 

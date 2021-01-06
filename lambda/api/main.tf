@@ -1,5 +1,5 @@
 module "lambda_functions" {
-  source = "git@github.com:piston-sh/tf-aws-modules//lambda/rest_function?ref=0.12"
+  source = "git@github.com:piston-sh/tf-aws-modules//lambda/rest_function"
 
   enabled                = length(keys(var.method_function_map)) > 0
   cluster_name           = var.cluster_name
@@ -14,7 +14,7 @@ module "lambda_functions" {
 }
 
 module "resource" {
-  source = "git@github.com:piston-sh/tf-aws-modules//apigateway/http_resource?ref=0.12"
+  source = "git@github.com:piston-sh/tf-aws-modules//apigateway/http_resource"
 
   rest_api_id      = var.rest_api_id
   path_part        = var.path_part
@@ -22,7 +22,7 @@ module "resource" {
 }
 
 module "get_verb" {
-  source = "git@github.com:piston-sh/tf-aws-modules//apigateway/http_verb?ref=0.12"
+  source = "git@github.com:piston-sh/tf-aws-modules//apigateway/http_verb"
 
   enabled               = contains(keys(var.method_function_map), "GET")
   rest_api_id           = var.rest_api_id
@@ -45,7 +45,7 @@ module "get_verb" {
 }
 
 module "post_verb" {
-  source = "git@github.com:piston-sh/tf-aws-modules//apigateway/http_verb?ref=0.12"
+  source = "git@github.com:piston-sh/tf-aws-modules//apigateway/http_verb"
 
   enabled               = contains(keys(var.method_function_map), "POST")
   rest_api_id           = var.rest_api_id
@@ -68,7 +68,7 @@ module "post_verb" {
 }
 
 module "put_verb" {
-  source = "git@github.com:piston-sh/tf-aws-modules//apigateway/http_verb?ref=0.12"
+  source = "git@github.com:piston-sh/tf-aws-modules//apigateway/http_verb"
 
   enabled               = contains(keys(var.method_function_map), "PUT")
   rest_api_id           = var.rest_api_id
@@ -91,7 +91,7 @@ module "put_verb" {
 }
 
 module "delete_verb" {
-  source = "git@github.com:piston-sh/tf-aws-modules//apigateway/http_verb?ref=0.12"
+  source = "git@github.com:piston-sh/tf-aws-modules//apigateway/http_verb"
 
   enabled               = contains(keys(var.method_function_map), "DELETE")
   rest_api_id           = var.rest_api_id

@@ -2,18 +2,18 @@ variable "cluster_name" {}
 variable "vpc_id" {}
 
 variable "subnet_ids" {
-  type = "list"
+  type = list(string)
 }
 
 variable "availability_zones" {
-  type = "list"
+  type = list(string)
 }
 
 variable "ami" {}
 variable "user_data" {}
 
 variable "instance_type" {
-  default = "t2.micro"
+  default = "t3.micro"
 }
 
 variable "instance_group" {
@@ -37,22 +37,22 @@ variable "volume_size" {
 }
 
 variable "security_group_ids" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
 
 variable "allowed_ssh_cidr_blocks" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
 
 variable "allowed_ssh_ipv6_cidr_blocks" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
 
 variable "allowed_ssh_security_group_ids" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
 
@@ -63,7 +63,7 @@ variable "associate_public_ip" {
 variable "ssh_key_name" {}
 
 variable "custom_tags" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
 

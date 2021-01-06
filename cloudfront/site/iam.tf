@@ -23,7 +23,7 @@ EOF
 
 resource "aws_iam_role_policy" "lambda_role_policy" {
   name = "${length(var.subdomain) > 0 ? "${var.subdomain}" : "root" }-cloudfront-edge-policy"
-  role = "${aws_iam_role.iam_role.id}"
+  role = aws_iam_role.iam_role.id
 
   policy = <<EOF
 {

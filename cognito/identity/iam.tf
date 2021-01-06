@@ -1,6 +1,6 @@
 resource "aws_iam_role" "cognito" {
   name_prefix        = "${var.name}-identity-"
-  assume_role_policy = "${data.template_file.cognito_policy.rendered}"
+  assume_role_policy = data.template_file.cognito_policy.rendered
 }
 
 resource "aws_iam_role" "lambda" {
@@ -22,14 +22,14 @@ EOF
 
 resource "aws_iam_policy" "lambda" {
   name_prefix = "${var.name}-identity-register-"
-  policy      = "${data.template_file.lambda_policy.rendered}"
+  policy      = data.template_file.lambda_policy.rendered
 }
 
 resource "aws_iam_policy_attachment" "lambda_attachment" {
   name = "${var.name}-identity-register"
 
-  policy_arn = "${aws_iam_policy.lambda.arn}"
-  roles      = ["${aws_iam_role.lambda.name}"]
+  policy_arn = aws_iam_policy.lambda.arn
+  roles      = [aws_iam_role.lambda.name]
 }
 
 data "template_file" "cognito_policy" {
@@ -55,7 +55,7 @@ data "template_file" "cognito_policy" {
 EOF
 
   vars = {
-    identity_pool_id = "${aws_cognito_identity_pool.identity_pool.id}"
+    identity_pool_id = aws_cognito_identity_pool.identity_pool.id
   }
 }
 
@@ -85,6 +85,6 @@ data "template_file" "lambda_policy" {
 EOF
 
   vars = {
-    user_pool_arn = "${aws_cognito_user_pool.user_pool.arn}"
+    user_pool_arn = aws_cognito_user_pool.user_pool.arn
   }
 }

@@ -1,12 +1,12 @@
 module "vpc" {
-  source = "git@github.com:piston-sh/tf-aws-modules//vpc/vpc?ref=0.12"
+  source = "git@github.com:piston-sh/tf-aws-modules//vpc/vpc"
 
   name       = var.name
   cidr_block = var.vpc_cidr
 }
 
 module "public_subnet" {
-  source = "git@github.com:piston-sh/tf-aws-modules//vpc/subnet?ref=0.12"
+  source = "git@github.com:piston-sh/tf-aws-modules//vpc/subnet"
 
   name               = "${var.name}-public"
   vpc_id             = module.vpc.vpc_id
@@ -15,7 +15,7 @@ module "public_subnet" {
 }
 
 module "private_subnet" {
-  source = "git@github.com:piston-sh/tf-aws-modules//vpc/subnet?ref=0.12"
+  source = "git@github.com:piston-sh/tf-aws-modules//vpc/subnet"
 
   name               = "${var.name}-private"
   vpc_id             = module.vpc.vpc_id
@@ -27,6 +27,7 @@ resource "aws_internet_gateway" "gateway" {
   vpc_id = module.vpc.vpc_id
 
   tags = {
+    provisioner = "terraform"
     name = var.name
   }
 }
@@ -108,7 +109,8 @@ resource "aws_instance" "nat_instance" {
   associate_public_ip_address = true
 
   tags = {
-    Name = "nat"
+    name = "nat"
+    provisioner = "terraform"
   }
 
   lifecycle {

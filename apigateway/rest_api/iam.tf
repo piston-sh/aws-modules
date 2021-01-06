@@ -20,7 +20,7 @@ EOF
 
 resource "aws_iam_role_policy" "cloudwatch" {
   name = "${var.cluster_name}_cloudwatch"
-  role = "${aws_iam_role.rest_api_iam_role.id}"
+  role = aws_iam_role.rest_api_iam_role.id
 
   policy = <<EOF
 {

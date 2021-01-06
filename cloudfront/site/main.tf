@@ -1,11 +1,11 @@
 resource "aws_route53_record" "www" {
   count   = "${var.enable_route53 ? 1 : 0}"
-  zone_id = "${data.aws_route53_zone.hosted_zone.zone_id}"
+  zone_id = data.aws_route53_zone.hosted_zone.zone_id
   name    = "${length(var.subdomain) > 0 ? "${var.subdomain}.${var.root_domain}" : "${var.root_domain}" }"
   type    = "A"
 
   alias {
-    name                   = "${aws_cloudfront_distribution.distribution.domain_name}"
+    name                   = aws_cloudfront_distribution.distribution.domain_name
     zone_id                = "Z2FDTNDATAQYW2"
     evaluate_target_health = false
   }
@@ -16,10 +16,10 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
 }
 
 resource "aws_cloudfront_distribution" "distribution" {
-  comment = "${var.comment}"
+  comment = var.comment
 
   origin {
-    domain_name = "${aws_s3_bucket.site_bucket.website_endpoint}"
+    domain_name = aws_s3_bucket.site_bucket.website_endpoint
     origin_id   = "SiteBucket"
 
     custom_origin_config {
@@ -61,7 +61,7 @@ resource "aws_cloudfront_distribution" "distribution" {
   }
 
   viewer_certificate {
-    acm_certificate_arn      = "${var.acm_certificate_arn}"
+    acm_certificate_arn      = var.acm_certificate_arn
     minimum_protocol_version = "TLSv1"
     ssl_support_method       = "sni-only"
   }

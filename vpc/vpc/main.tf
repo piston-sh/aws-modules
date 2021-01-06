@@ -4,6 +4,7 @@ resource "aws_vpc" "vpc" {
   enable_dns_support   = true
 
   tags = {
+    provisioner = "terraform"
     name = var.name
   }
 }

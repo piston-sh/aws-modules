@@ -53,7 +53,7 @@ resource "aws_api_gateway_integration" "http_resource_integration" {
   )
 
   request_templates = {
-    "application/json" = "${var.json_request_template}"
+    "application/json" = var.json_request_template
   }
 
   depends_on = [

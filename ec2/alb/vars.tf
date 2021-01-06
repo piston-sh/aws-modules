@@ -6,7 +6,7 @@ variable "target_security_group_id" {}
 variable "acm_certificate_arn" {}
 
 variable "subnet_ids" {
-  type = "list"
+  type = list(string)
 }
 
 variable "health_check_path" {
@@ -18,6 +18,6 @@ variable "health_check_matcher" {
 }
 
 variable "allowed_inbound_cidr_blocks" {
-  type    = "list"
+  type    = list(string)
   default = []
 }

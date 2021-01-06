@@ -1,8 +1,8 @@
 resource "aws_api_gateway_integration" "http_resource_integration" {
   count       = "${var.enabled ? 1 : 0}"
-  rest_api_id = "${var.rest_api_id}"
-  resource_id = "${var.resource_id}"
-  http_method = "${var.http_method}"
+  rest_api_id = var.rest_api_id
+  resource_id = var.resource_id
+  http_method = var.http_method
   type        = "AWS_PROXY"
 
   # Lambdas must always be invoked with a POST request
@@ -18,7 +18,7 @@ resource "aws_api_gateway_integration" "http_resource_integration" {
   )}"
 
   request_templates = {
-    "application/json" = "${var.json_request_template}"
+    "application/json" = var.json_request_template
   }
 }
 

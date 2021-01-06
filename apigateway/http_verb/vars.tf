@@ -15,7 +15,7 @@ variable "cognito_authorizer_id" {
 }
 
 variable "response_codes" {
-  type    = "list"
+  type    = list(string)
   default = ["200", "400", "403", "500"]
 }
 

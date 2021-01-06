@@ -1,14 +1,14 @@
 resource "aws_dynamodb_table" "table" {
-  name = "${var.table_name}"
+  name = var.table_name
 
-  read_capacity  = "${var.read_capacity}"
-  write_capacity = "${var.write_capacity}"
+  read_capacity  = var.read_capacity
+  write_capacity = var.write_capacity
 
-  hash_key = "${var.primary_key}"
+  hash_key = var.primary_key
 
   attribute {
-    name = "${var.primary_key}"
-    type = "${var.primary_key_type}"
+    name = var.primary_key
+    type = var.primary_key_type
   }
 
   stream_enabled   = true

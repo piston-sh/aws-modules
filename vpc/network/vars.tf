@@ -2,15 +2,15 @@ variable "name" {}
 variable "vpc_cidr" {}
 
 variable "public_subnet_cidrs" {
-  type = "list"
+  type = list(string)
 }
 
 variable "private_subnet_cidrs" {
-  type = "list"
+  type = list(string)
 }
 
 variable "availability_zones" {
-  type = "list"
+  type = list(string)
 }
 
 variable "destination_cidr_block" {
@@ -26,7 +26,7 @@ variable "use_nat_instance" {
 }
 
 variable "instance_type" {
-  default = "t2.nano"
+  default = "t3.nano"
 }
 
 variable "instance_ami_id" {

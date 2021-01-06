@@ -30,12 +30,12 @@ variable "cognito_authorizer_id" {
 }
 
 variable "method_function_map" {
-  type    = "map"
+  type    = map
   default = {}
 }
 
 variable "method_env_map" {
-  type = "map"
+  type = map(map(string))
 
   default = {
     "GET" = {
@@ -57,22 +57,22 @@ variable "method_env_map" {
 }
 
 variable "get_request_params" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
 
 variable "post_request_params" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
 
 variable "put_request_params" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
 
 variable "delete_request_params" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
 

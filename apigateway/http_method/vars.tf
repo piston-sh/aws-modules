@@ -19,6 +19,6 @@ variable "custom_request_parameters" {
 }
 
 variable "response_codes" {
-  type    = "list"
+  type    = list(string)
   default = ["200", "400", "403", "500"]
 }

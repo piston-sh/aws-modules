@@ -1,6 +1,6 @@
 resource "aws_s3_bucket_object" "object" {
-  bucket = "${var.s3_bucket_name}"
-  key    = "${var.s3_bucket_key}"
+  bucket = var.s3_bucket_name
+  key    = var.s3_bucket_key
   source = "${data.archive_file.archive.output_path}"
   etag   = "${filemd5("${data.archive_file.archive.output_path}")}"
 }
