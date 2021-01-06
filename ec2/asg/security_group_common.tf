@@ -7,6 +7,7 @@ resource "aws_security_group" "security_group_common" {
   }
 
   tags = {
+    provisioner    = "terraform"
     cluster        = var.cluster_name
     instance_group = var.instance_group
   }

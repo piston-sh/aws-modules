@@ -8,6 +8,7 @@ resource "aws_security_group" "security_group" {
   }
 
   tags = {
+    provisioner = "terraform"
     cluster = var.name
   }
 }

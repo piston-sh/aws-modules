@@ -73,7 +73,7 @@ resource "aws_cloudfront_distribution" "distribution" {
   }
 
   tags = {
-    terraform = "true"
+    provisioner = "terraform"
   }
 
   depends_on = [

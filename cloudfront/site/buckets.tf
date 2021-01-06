@@ -12,8 +12,8 @@ resource "aws_s3_bucket" "site_bucket" {
   }
 
   tags = {
-    name      = var.bucket_name
-    terraform = "true"
+    provisioner = "terraform"
+    Name        = var.bucket_name
   }
 }
 

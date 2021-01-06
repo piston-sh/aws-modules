@@ -28,7 +28,7 @@ resource "aws_internet_gateway" "gateway" {
 
   tags = {
     provisioner = "terraform"
-    name = var.name
+    Name = var.name
   }
 }
 
@@ -109,7 +109,7 @@ resource "aws_instance" "nat_instance" {
   associate_public_ip_address = true
 
   tags = {
-    name = "nat"
+    Name = "nat"
     provisioner = "terraform"
   }
 
