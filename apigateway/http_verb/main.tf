@@ -29,7 +29,7 @@ resource "aws_api_gateway_method_response" "response" {
   }
 
   depends_on = [
-    "aws_api_gateway_method.http_resource_method",
+    aws_api_gateway_method.http_resource_method,
   ]
 }
 
@@ -57,7 +57,7 @@ resource "aws_api_gateway_integration" "http_resource_integration" {
   }
 
   depends_on = [
-    "aws_api_gateway_method.http_resource_method",
+    aws_api_gateway_method.http_resource_method,
   ]
 }
 

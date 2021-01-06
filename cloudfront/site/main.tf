@@ -77,7 +77,7 @@ resource "aws_cloudfront_distribution" "distribution" {
   }
 
   depends_on = [
-    "aws_s3_bucket.site_bucket",
+    aws_s3_bucket.site_bucket,
   ]
 }
 

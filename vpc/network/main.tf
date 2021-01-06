@@ -44,7 +44,7 @@ resource "aws_eip" "nat_eip" {
   vpc   = true
 
   depends_on = [
-    "aws_internet_gateway.gateway",
+    aws_internet_gateway.gateway,
   ]
 
   lifecycle {
@@ -64,7 +64,7 @@ resource "aws_nat_gateway" "private_nat" {
   }
 
   depends_on = [
-    "aws_internet_gateway.gateway",
+    aws_internet_gateway.gateway,
   ]
 }
 
