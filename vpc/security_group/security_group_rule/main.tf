@@ -13,7 +13,7 @@ resource "aws_security_group_rule" "allow_udp_port_inbound" {
   type        = "ingress"
   from_port   = var.port
   to_port     = var.port
-  protocol    = "tcp"
+  protocol    = "udp"
   cidr_blocks = var.inbound_cidr_blocks
   security_group_id = var.security_group_id
 }
