@@ -12,9 +12,19 @@ resource "aws_security_group" "security_group" {
     }
 }
 
-module "security_group_rules" {
+resource "aws_security_group_rule" "allow_all_outbound" {
+  type        = "egress"
+  from_port   = 0
+  to_port     = 0
+  protocol    = "-1"
+  cidr_blocks = ["0.0.0.0/0"]
+
+  security_group_id = aws_security_group.security_group.id
+}
+
+module "security_group_inbound_rules" {
+  source = "./security_group_inbound_rules"
   for_each = var.port_mappings
-  source = "./security_group_rule"
   security_group_id = aws_security_group.security_group.id
   port = each.key
   tcp_enabled = each.value.tcp_enabled
