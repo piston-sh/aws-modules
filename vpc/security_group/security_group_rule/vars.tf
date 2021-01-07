@@ -6,12 +6,12 @@ variable "port" {
 }
 
 variable "tcp_enabled" {
-    type = list(bool)
+    type = bool
     default = true
 }
 
 variable "udp_enabled" {
-    type = list(bool)
+    type = bool
     default = false
 }
 
