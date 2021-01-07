@@ -6,7 +6,7 @@ resource "aws_security_group" "security_group" {
         create_before_destroy = true
     }
 
-    tags {
+    tags = {
         provisioner = "terraform"
         identifier = var.identifier
     }
