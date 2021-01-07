@@ -3,7 +3,10 @@ variable "prefix" {}
 variable "identifier" {}
 
 variable "port_mappings" {
-    type = map(object)
+    type = map(object({
+        tcp_enabled = bool,
+        udp_enabled = bool,
+    }))
     default = {
         "22" = {
             tcp_enabled = true,
